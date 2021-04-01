@@ -20,6 +20,7 @@ public class HelloAppEngine extends HttpServlet {
 
     response.getWriter().print("Hello App Engine!\r\n");
     response.getWriter().print("Hello Leevi!\r\n");
+    response.getWriter().print("Hello Juho!\r\n");
 
   }
 }
