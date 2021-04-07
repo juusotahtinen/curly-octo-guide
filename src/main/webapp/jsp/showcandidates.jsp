@@ -36,7 +36,7 @@
                 <th>Puolue</th>
                 <th>Actions</th>
             </tr>
-            <c:forEach var="candidate" items="${candidatelist}">
+            <c:forEach var="candidate" items="${listcandidates}">
                 <tr>
                     <td><c:out value="${candidate.id}" /></td>
                     <td><c:out value="${candidate.lastname}" /></td>
