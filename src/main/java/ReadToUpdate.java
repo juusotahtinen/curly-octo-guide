@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,19 +7,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
 import dao.Dao;
 import data.Candidates;
 
 /**
- * Servlet implementation class ShowCandidates
+ * Servlet implementation class ReadToUpdate
  */
-@WebServlet("/showcandidates")
-public class HelloAppEngine extends HttpServlet {
+@WebServlet("/readtoupdate")
+public class ReadToUpdate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Dao dao=null;
-	
-	@Override
+	private Dao dao;
 	public void init() {
 		dao=new Dao();
 	}
@@ -28,25 +24,23 @@ public class HelloAppEngine extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public HelloAppEngine() {
+    public ReadToUpdate() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Candidates> list=null;
+		// TODO Auto-generated method stub
+		String id=request.getParameter("id");
+		Candidates f=null;
 		if (dao.getConnection()) {
-			list=dao.readAllCandidates();
+			f=dao.readCandidates(id);
 		}
-		else {
-			System.out.println("No connection to database");
-		}
-		request.setAttribute("candidatelist", list);
+		request.setAttribute("fish", f);
 		
-		RequestDispatcher rd=request.getRequestDispatcher("/jsp/showcandidates.jsp");
+		RequestDispatcher rd=request.getRequestDispatcher("/jsp/showcandidatetoedit.jsp");
 		rd.forward(request, response);
 	}
 }
