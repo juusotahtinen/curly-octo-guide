@@ -30,7 +30,6 @@ public class HelloAppEngine extends HttpServlet {
      */
     public HelloAppEngine() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
