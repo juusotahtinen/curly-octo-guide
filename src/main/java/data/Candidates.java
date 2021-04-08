@@ -7,9 +7,6 @@ public class Candidates {
 	private String etunimi;
 	private String puolue;
 	
-	public Candidates() {
-		
-	}
 
 	public int getEhdokas_id() {
 		return ehdokas_id;
