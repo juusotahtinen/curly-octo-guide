@@ -3,7 +3,7 @@ package dao;
 import java.sql.*;
 
 
-public class Dao {
+public class DaoAnswers {
 	
 	String dbURL = "jdbc:mysql://localhost:3306/vaalikone";
 	String username = "pena";

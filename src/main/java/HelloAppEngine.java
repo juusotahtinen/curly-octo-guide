@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-import dao.Dao;
+import dao.DaoAnswers;
 
 
 @WebServlet(
@@ -16,7 +16,7 @@ import dao.Dao;
 )
 public class HelloAppEngine extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private Dao dao = null; 
+	private DaoAnswers dao = null; 
 	
     
   @Override
@@ -25,7 +25,7 @@ public class HelloAppEngine extends HttpServlet {
 
     response.setContentType("text/plain");
     response.setCharacterEncoding("UTF-8");
-    dao = new Dao();
+    dao = new DaoAnswers();
     dao.Insert();
     dao.Select();
     
