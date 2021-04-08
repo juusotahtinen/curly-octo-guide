@@ -11,7 +11,7 @@ public class HelloAppEngineTest {
   public void test() throws IOException {
     MockHttpServletResponse response = new MockHttpServletResponse();
     try {
-		new HelloAppEngine().doGet(null, response);
+		new ShowCandidates().doGet(null, response);
 	} catch (ServletException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

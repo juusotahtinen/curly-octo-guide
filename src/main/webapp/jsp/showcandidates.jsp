@@ -38,14 +38,14 @@
             </tr>
             <c:forEach var="candidate" items="${listcandidates}">
                 <tr>
-                    <td><c:out value="${candidate.id}" /></td>
-                    <td><c:out value="${candidate.lastname}" /></td>
-                    <td><c:out value="${candidate.firstname}" /></td>
-                    <td><c:out value="${candidate.party}" /></td>
+                    <td><c:out value="${candidate.ehdokas_id}" /></td>
+                    <td><c:out value="${candidate.sukunimi}" /></td>
+                    <td><c:out value="${candidate.etunimi}" /></td>
+                    <td><c:out value="${candidate.puolue}" /></td>
                     <td>
-                        <a href="/edit?id=<c:out value='${candidate.id}' />">Edit</a>
+                        <a href="/edit?id=<c:out value='${candidate.ehdokas_id}' />">Edit</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="/delete?id=<c:out value='${candidate.id}' />">Delete</a>                     
+                        <a href="/delete?id=<c:out value='${candidate.ehdokas_id}' />">Delete</a>                     
                     </td>
                 </tr>
             </c:forEach>
