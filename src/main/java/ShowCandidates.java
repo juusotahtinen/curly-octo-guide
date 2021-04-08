@@ -42,9 +42,9 @@ public class ShowCandidates extends HttpServlet {
 		else {
 			System.out.println("No connection to database");
 		}
-		request.setAttribute("fishlist", list);
+		request.setAttribute("candidatesList", list);
 		
-		RequestDispatcher rd=request.getRequestDispatcher("/jsp/showfish.jsp");
+		RequestDispatcher rd=request.getRequestDispatcher("/jsp/showcandidates.jsp");
 		rd.forward(request, response);
 	}
 }

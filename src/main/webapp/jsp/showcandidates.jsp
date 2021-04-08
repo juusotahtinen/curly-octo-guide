@@ -8,34 +8,47 @@
     
 <!DOCTYPE html>
 <html>
-	<head>
-	<meta charset="UTF-8">
-		<title>Fish application</title>
+<head>
+<meta charset="UTF-8">
+<title>Vaalikone</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-		<link rel="stylesheet" type="text/css" href="mycssfilesomewhere.css">
-		<script src="myscriptfile.js"></script>
-
-	</head>
+</head>
 <body>
-	<h2>Fish application</h2>
-		<ol>
-		<c:forEach var="fish" items="${requestScope.fishlist}" >
-		<li>${fish.id}: ${fish.breed} <a href='/delete?id=${fish.id}'>delete</a> <a href='/readtoupdate?id=${fish.id}'>update</a>
-		</c:forEach>
-		</ol>
+<div class = "container">
+		
+	<h1>Ehdokasluettelo</h1>
+	<hr/>
+		
+	<p>${NOTIFICATION}</p>
+		
+		
+	
+		<table class = "table table-striped table-bordered">
+			
+			<tr class = "thead-dark">
+				<th>Sukunimi</th>
+				<th>Etunimi</th>
+				<th>Puolue</th>
+				<th>Toiminnot</th>
+			</tr>
 
-		<%
-			ArrayList<Candidates> candidatesList=(ArrayList<Candidates>)request.getAttribute("candidatesList");
-
-			for (int i=0;candidatesList!=null && i<candidatesList.size();i++){
-			Candidates f=candidatesList.get(i);
-			out.println(f.getEhdokas_id()+": "+f.getSukunimi()+"<a href='/delete?id="+f.getEhdokas_id()+"'>delete</a> <a href='/readtoupdate?id="+f.getEhdokas_id()+"'>update</a>");
-			}
-		%>
-
-
-
-
-
+			<c:forEach var="candidates" items="${requestScope.candidatesList}" >
+			<tr>
+					<td>${candidates.sukunimi}</td>
+					<td>${candidates.etunimi}</td>
+					<td>${candidates.puolue}</td>
+					<td> 
+					<a href = "${pageContext.request.contextPath}/ShowCandidates?action=EDIT&id=${candidates.ehdokas_id}">Edit</a> 
+					| 
+					<a href = "${pageContext.request.contextPath}/ShowCandidates?action=DELETE&id=${candidates.ehdokas_id}">Delete</a> 
+					</td>
+				</tr>
+			</c:forEach>
+		</table>
+		
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>
