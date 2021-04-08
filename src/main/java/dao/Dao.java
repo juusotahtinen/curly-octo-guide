@@ -8,6 +8,7 @@ public class Dao {
 	String dbURL = "jdbc:mysql://localhost:3306/vaalikone";
 	String username = "pena";
 	String password = "kukkuu";
+	Connection conn = null;
 	
 //	private String dbURL;
 //	private String username;
@@ -25,6 +26,8 @@ public class Dao {
 	public void Insert() {
 		 
 		try {
+			
+
 			
 		    Connection conn = DriverManager.getConnection(dbURL, username, password);
 		    
