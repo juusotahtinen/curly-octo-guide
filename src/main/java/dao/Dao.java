@@ -1,123 +1,114 @@
 package dao;
 
+import java.sql.DriverManager;
 
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 import data.Candidates;
-import data.DBConnectionUtil;
 
+import java.sql.Connection;
 
-public class Dao implements CandidatesDAO {
+public class Dao {
+	private String url;
+	private String user;
+	private String pass;
+	private Connection conn;
 	
-	Connection connection = null;
-	ResultSet resultSet = null;
-	Statement statement = null;
-	PreparedStatement preparedStatement = null;
+	public Dao(String url, String user, String pass) {
+		this.url=url;
+		this.user=user;
+		this.pass=pass;
+	}
 	
-	@Override
-	public List<Candidates> get() {
-		
-		List<Candidates> list = null;
-		Candidates candidates = null;
-		
+	public boolean getConnection() {
 		try {
-			
-			list = new ArrayList<Candidates>();
-			String sql = "SELECT * FROM ehdokkaat";
-			connection = DBConnectionUtil.openConnection();
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(sql);
-			while(resultSet.next()) {
-				candidates = new Candidates();
-				candidates.setEhdokas_id(resultSet.getInt("ehdokas_id"));
-				candidates.setSukunimi(resultSet.getString("sukunimi"));
-				candidates.setEtunimi(resultSet.getString("etunimi"));
-				candidates.setPuolue(resultSet.getString("puolue"));
-				list.add(candidates);
+	        if (conn == null || conn.isClosed()) {
+	            try {
+	                Class.forName("com.mysql.jdbc.Driver").newInstance();
+	            } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+	                throw new SQLException(e);
+	            }
+	            conn = DriverManager.getConnection(url, user, pass);
+	        }
+	        return true;
+		}
+		catch (SQLException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
+	public ArrayList<Candidates> readAllCandidates() {
+		ArrayList<Candidates> list=new ArrayList<>();
+		try {
+			Statement stmt=conn.createStatement();
+			ResultSet RS=stmt.executeQuery("select * from ehdokkaat");
+			while (RS.next()){
+				Candidates f=new Candidates();
+				f.setEhdokas_id(RS.getInt("ehdokas_id"));
+				f.setSukunimi(RS.getString("sukunimi"));
+				f.setEtunimi(RS.getString("etunimi"));
+				f.setPuolue(RS.getString("puolue"));
+				list.add(f);
 			}
-		}catch(SQLException e) {
-			e.printStackTrace();
+			return list;
 		}
-		return list;
+		catch(SQLException e) {
+			return null;
+		}
+	}
+	public ArrayList<Candidates> updateCandidates(Candidates f) {
+		try {
+			String sql="update ehdokkaat set sukunimi=? etunimi=? where ehdokas_id=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, f.getSukunimi());
+			pstmt.setString(2, f.getEtunimi());
+			pstmt.setString(3, f.getPuolue());
+			pstmt.setInt(4, f.getEhdokas_id());
+			pstmt.executeUpdate();
+			return readAllCandidates();
+		}
+		catch(SQLException e) {
+			return null;
+		}
+	}
+	public ArrayList<Candidates> deleteCandidates(String ehdokas_id) {
+		try {
+			String sql="delete from ehdokkaat where ehdokas_id=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, ehdokas_id);
+			pstmt.executeUpdate();
+			return readAllCandidates();
+		}
+		catch(SQLException e) {
+			return null;
+		}
 	}
 
-	@Override
-	public Candidates get(int id) {
-		Candidates candidates = null;
+	public Candidates readCandidates(String ehdokas_id) {
+		Candidates f=null;
 		try {
-			candidates = new Candidates();
-			String sql = "SELECT * FROM ehdokkaat where ehdokas_id="+id;
-			connection = DBConnectionUtil.openConnection();
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(sql);
-			if(resultSet.next()) {
-				candidates.setEhdokas_id(resultSet.getInt("ehdokas_id"));
-				candidates.setSukunimi(resultSet.getString("sukunimi"));
-				candidates.setEtunimi(resultSet.getString("etunimi"));
-				candidates.setPuolue(resultSet.getString("puolue"));
+			String sql="select * from ehdokkaat where ehdokas_id=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, ehdokas_id);
+			ResultSet RS=pstmt.executeQuery();
+			while (RS.next()){
+				f=new Candidates();
+				f.setEhdokas_id(RS.getInt("ehdokas_id"));
+				f.setSukunimi(RS.getString("sukunimi"));
+				f.setEtunimi(RS.getString("etunimi"));
+				f.setPuolue(RS.getString("puolue"));
 			}
-		}catch(SQLException e) {
-			e.printStackTrace();
+			return f;
 		}
-		return candidates;
-	}
-
-	@Override
-	public boolean save(Candidates e) {
-		boolean flag = false;
-		try {
-			String sql = "INSERT INTO tbl_employee(name, department, dob)VALUES"
-					+ "('"+e.getSukunimi()+"', '"+e.getEtunimi()+"', '"+e.getPuolue()+"')";
-			connection = DBConnectionUtil.openConnection();
-			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.executeUpdate();
-			flag = true;
-		}catch(SQLException ex) {
-			ex.printStackTrace();
+		catch(SQLException e) {
+			return null;
 		}
-		return flag;
 	}
-
-	@Override
-	public boolean delete(int ehdokas_id) {
-		boolean flag = false;
-		try {
-			String sql = "DELETE FROM ehdokkaat where ehdokas_id="+ehdokas_id;
-			connection = DBConnectionUtil.openConnection();
-			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.executeUpdate();
-			flag = true;
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}
-		return flag;
-	}
-
-	@Override
-	public boolean update(Candidates candidates) {
-		boolean flag = false;
-		try {
-			String sql = "UPDATE tbl_employee SET name = '"+candidates.getSukunimi()+"', "
-					+ "department = '"+candidates.getEtunimi()+"', dob = '"+candidates.getPuolue()+"' where ehdokas_id="+candidates.getEhdokas_id();
-			connection = DBConnectionUtil.openConnection();
-			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.executeUpdate();
-			flag = true;
-		}catch(SQLException e) {
-			e.printStackTrace();
-		}
-		return flag;
-	}
-
-
-
 }
 
 
