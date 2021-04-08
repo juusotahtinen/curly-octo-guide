@@ -35,14 +35,14 @@ public class ShowCandidates extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Candidates> list=null;
+		ArrayList<Candidates> candidatesList=null;
 		if (dao.getConnection()) {
-			list=dao.readAllCandidates();
+			candidatesList=dao.readAllCandidates();
 		}
 		else {
 			System.out.println("No connection to database");
 		}
-		request.setAttribute("candidatesList", list);
+		request.setAttribute("candidatesList", candidatesList);
 		
 		RequestDispatcher rd=request.getRequestDispatcher("/jsp/showcandidates.jsp");
 		rd.forward(request, response);

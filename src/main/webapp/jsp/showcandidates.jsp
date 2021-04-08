@@ -33,9 +33,9 @@
 				<th>Toiminnot</th>
 			</tr>
 
-			<c:forEach var="candidates" items="${requestScope.candidatesList}" >
+			<c:forEach var="candidatesList" items="${requestScope.candidatesList}" >
 			<tr>
-					<td>${candidates.sukunimi}</td>
+					<td>${candidatesList.sukunimi}</td>
 					<td>${candidates.etunimi}</td>
 					<td>${candidates.puolue}</td>
 					<td> 
