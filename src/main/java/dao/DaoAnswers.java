@@ -1,6 +1,9 @@
 package dao;
 
 import java.sql.*;
+import java.util.ArrayList;
+
+import data.Kysymykset;
 
 
 public class DaoAnswers {
@@ -64,7 +67,9 @@ public class DaoAnswers {
 		
 	}
 	
-	public void Select() {
+	public ArrayList<Kysymykset> Select() {
+		
+		ArrayList<Kysymykset> list = new ArrayList<Kysymykset>();
 		 
 		try {
 			
@@ -78,7 +83,7 @@ public class DaoAnswers {
 		    Connection conn = DriverManager.getConnection(dbURL, username, password);
 
 			
-			String sql2 = "SELECT * FROM ehdokkaat";
+			String sql2 = "SELECT * FROM kysymykset";
 			 
 			Statement statement2 = conn.createStatement();
 			ResultSet result = statement2.executeQuery(sql2);
@@ -86,21 +91,22 @@ public class DaoAnswers {
 
 			 
 			while (result.next()){
-			    String id = result.getString(1);
-			    String sukunimi = result.getString(2);
-			    String etunimi = result.getString("ETUNIMI");
-			    String puolue = result.getString("PUOLUE");
-			 
-			    String output = "%s - %s - %s - %s";
+				Kysymykset k = new Kysymykset();
+				k.setId(result.getInt("KYSYMYS_ID"));
+				k.setKysymys(result.getString("KYSYMYS"));
+				list.add(k);
+
 			    
-			    System.out.println(String.format(output, id, sukunimi, etunimi, puolue));
 			}
+			return list;
 			
 			
 			
 		} catch (SQLException ex) {
-		    ex.printStackTrace();
+		    return null;
 		}
+
+
 	}
 	
 	public void Update() {

@@ -1,6 +1,8 @@
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import dao.DaoAnswers;
+import data.Kysymykset;
 
 
 @WebServlet(
@@ -21,15 +24,19 @@ public class HelloAppEngine extends HttpServlet {
     
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) 
-      throws IOException {
+      throws IOException, ServletException {
 
     response.setContentType("text/plain");
     response.setCharacterEncoding("UTF-8");
 
     dao = new DaoAnswers();
-    dao.Insert();
-    dao.Select();
+
+    ArrayList<Kysymykset> list = dao.Select();
     
+    request.setAttribute("kysymykset", list);
+    
+    RequestDispatcher rd = request.getRequestDispatcher("jsp/GUI.jsp");
+    rd.forward(request,  response);
    
     
     
