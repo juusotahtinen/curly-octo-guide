@@ -8,7 +8,7 @@ import org.junit.Test;
 public class HelloAppEngineTest {
 
   @Test
-  public void test() throws IOException {
+  public void test() throws IOException, ServletException {
     MockHttpServletResponse response = new MockHttpServletResponse();
     try {
 		new ShowCandidates().doGet(null, response);
