@@ -10,7 +10,12 @@ public class HelloAppEngineTest {
   @Test
   public void test() throws IOException, ServletException {
     MockHttpServletResponse response = new MockHttpServletResponse();
-    new HelloAppEngine().doGet(null, response);
+    try {
+		new ShowCandidates().doGet(null, response);
+	} catch (ServletException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
     Assert.assertEquals("text/plain", response.getContentType());
     Assert.assertEquals("UTF-8", response.getCharacterEncoding());
     Assert.assertEquals("Hello App Engine!\r\n", response.getWriterContent().toString());
