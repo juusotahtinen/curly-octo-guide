@@ -25,6 +25,7 @@ public class HelloAppEngine extends HttpServlet {
 
     response.setContentType("text/plain");
     response.setCharacterEncoding("UTF-8");
+
     dao = new DaoAnswers();
     dao.Insert();
     dao.Select();
@@ -38,6 +39,7 @@ public class HelloAppEngine extends HttpServlet {
 	
     
     
+
 
   }
 }
