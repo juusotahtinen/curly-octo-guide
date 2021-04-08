@@ -15,11 +15,13 @@ import dao.Dao;
     urlPatterns = {"/hello"}
 )
 public class HelloAppEngine extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private Dao dao = null; 
 	
-	
-    public void Init() {
-    	Dao dao = new Dao("jdbc:mysql://localhost:3306/vaalikone","pena", "kukkuu");
-    	dao.Insert();
+    public void init() {
+//    	Dao dao = new Dao("jdbc:mysql://localhost:3306/vaalikone","pena", "kukkuu");
+    	dao = new Dao();
+    	
     	
     }
     
@@ -31,7 +33,8 @@ public class HelloAppEngine extends HttpServlet {
 
     response.setContentType("text/plain");
     response.setCharacterEncoding("UTF-8");
-    Init();
+    dao.Insert();
+   
     
     
     
