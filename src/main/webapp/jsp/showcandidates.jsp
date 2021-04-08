@@ -20,10 +20,7 @@
 	<h1>Ehdokasluettelo</h1>
 	<hr/>
 		
-	<p>${NOTIFICATION}</p>
 		
-		
-	
 		<table class = "table table-striped table-bordered">
 			
 			<tr class = "thead-dark">
@@ -33,22 +30,21 @@
 				<th>Toiminnot</th>
 			</tr>
 
-			<c:forEach var="candidatesList" items="${requestScope.candidatesList}" >
+			<c:forEach var="listCandidates" items="${listCandidates}" >
 			<tr>
-					<td>${candidatesList.sukunimi}</td>
-					<td>${candidates.etunimi}</td>
-					<td>${candidates.puolue}</td>
+					<td>${listCandidates.sukunimi}</td>
+					<td>${listCandidates.etunimi}</td>
+					<td>${listCandidates.puolue}</td>
 					<td> 
-					<a href = "${pageContext.request.contextPath}/ShowCandidates?action=EDIT&id=${candidates.ehdokas_id}">Edit</a> 
+					<a href = "${pageContext.request.contextPath}/ShowCandidates?action=EDIT&id=${listCandidates.ehdokas_id}">Muokkaa</a> 
 					| 
-					<a href = "${pageContext.request.contextPath}/ShowCandidates?action=DELETE&id=${candidates.ehdokas_id}">Delete</a> 
+					<a href = "${pageContext.request.contextPath}/ShowCandidates?action=DELETE&id=${listCandidates.ehdokas_id}">Poista</a> 
 					</td>
 				</tr>
 			</c:forEach>
 		</table>
 		
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 </body>
 </html>
