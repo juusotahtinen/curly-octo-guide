@@ -27,7 +27,12 @@ public class Dao {
 		 
 		try {
 			
-
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		    Connection conn = DriverManager.getConnection(dbURL, username, password);
 		    
@@ -39,7 +44,7 @@ public class Dao {
 		    String sql = "INSERT INTO ehdokkaat (EHDOKAS_ID, SUKUNIMI, ETUNIMI, PUOLUE) VALUES (?, ?, ?, ?)";
 			
 			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setString(1, "326");
+			statement.setString(1, "327");
 			statement.setString(2, "Palo");
 			statement.setString(3, "Leevi");
 			statement.setString(4, "Kokoomus");
@@ -63,6 +68,12 @@ public class Dao {
 		 
 		try {
 			
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		 
 		    Connection conn = DriverManager.getConnection(dbURL, username, password);
 

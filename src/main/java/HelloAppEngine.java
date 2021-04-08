@@ -18,22 +18,17 @@ public class HelloAppEngine extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Dao dao = null; 
 	
-    public void init() {
-//    	Dao dao = new Dao("jdbc:mysql://localhost:3306/vaalikone","pena", "kukkuu");
-    	dao = new Dao();
-    	
-    	
-    }
     
-
-
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) 
       throws IOException {
 
     response.setContentType("text/plain");
     response.setCharacterEncoding("UTF-8");
+    dao = new Dao();
     dao.Insert();
+    dao.Select();
+    
    
     
     
