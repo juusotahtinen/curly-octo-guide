@@ -21,50 +21,12 @@
         </h2>
     </center>
 <div align="center">
-        <c:if test="${candidates != null}">
-            <form action="update" method="post">
-        </c:if>
-        <c:if test="${candidates == null}">
-            <form action="insert" method="post">
-        </c:if>
-        <table border="1" cellpadding="5">
-            <caption>
-                
-            </caption>
-                <c:if test="${candidates != null}">
-                    <input type="hidden" name="ehdokas_id" value="<c:out value='${candidates.ehdokas_id}' />" />
-                </c:if>           
-            <tr>
-                <th>Sukunimi: </th>
-                <td>
-                    <input type="text" name="sukunimi" size="45"
-                            value="<c:out value='${candidates.sukunimi}' />"
-                        />
-                </td>
-            </tr>
-            <tr>
-                <th>Etunimi: </th>
-                <td>
-                    <input type="text" name="etunimi" size="45"
-                            value="<c:out value='${candidates.etunimi}' />"
-                    />
-                </td>
-            </tr>
-            <tr>
-                <th>Puolue: </th>
-                <td>
-                    <input type="text" name="puolue" size="5"
-                            value="<c:out value='${candidates.puolue}' />"
-                    />
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center">
-                    <input type="submit" value="Tallenna" />
-                </td>
-            </tr>
-        </table>
-        </form>
+        <form action='/inserted' method='post'>
+			Ehdokkaan sukunimi: <input type='text' name='sukunimi' value='${requestScope.added.sukunimi}'><br> 
+			Ehdokkaan etunimi: <input type='text' name='etunimi' value='${requestScope.added.etunimi}'><br>
+			Ehdokkaan puolue: <input type='text' name='puolue' value='${requestScope.added.puolue}'><br>
+			<input type='submit' name='ok' value='Send'> 
+		</form>
     </div>
 </body>
 </html>

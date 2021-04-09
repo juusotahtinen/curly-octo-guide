@@ -64,9 +64,7 @@ public class Dao {
 			f.setPuolue(resultSet.getString("puolue"));
 			listCandidates.add(f);
         }  
-        resultSet.close();
-        statement.close(); 
-        disconnect(); 
+
         return listCandidates;
 	}
 	
@@ -91,15 +89,15 @@ public class Dao {
 		}
 	}
 	
-	public ArrayList<Candidates> insertCandidates(Candidates f) {
+	public ArrayList<Candidates> insert(Candidates f) {
 		try {
-			String sql="INSERT INTO ehdokkaat(sukunimi, etunimi, puolue) VALUES" + "('"+f.getSukunimi()+"', '"+f.getEtunimi()+"', '"+f.getPuolue()+"')";
+			String sql="insert into ehdokkaat(sukunimi, etunimi, puolue)values" + "('"+f.getSukunimi()+"', '"+f.getEtunimi()+"', '"+f.getPuolue()+"')";
 			PreparedStatement pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1, f.getSukunimi());
 			pstmt.setString(2, f.getEtunimi());
 			pstmt.setString(3, f.getPuolue());
 			pstmt.executeUpdate();
-			return insertCandidates(f);
+			return listAllCandidates();
 		}
 		catch(SQLException e) {
 			return null;

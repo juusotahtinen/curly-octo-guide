@@ -15,7 +15,7 @@ import data.Candidates;
 
 
 
-@WebServlet("/insert")
+@WebServlet("/inserted")
 public class InsertCandidates extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Dao dao=null;
@@ -28,7 +28,7 @@ public class InsertCandidates extends HttpServlet {
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) 
 	     throws IOException {
-		response.sendRedirect("index.html");
+
 	}
 	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 	     throws IOException, ServletException {
@@ -38,13 +38,13 @@ public class InsertCandidates extends HttpServlet {
 		
 		Candidates f=new Candidates(sukunimi, etunimi , puolue);
 		
-		ArrayList<Candidates> listAllCandidates=null;
+		ArrayList<Candidates> listCandidates=null;
 		if (dao.getConnection()) {
-			listAllCandidates=dao.insertCandidates(f);
+			listCandidates=dao.insert(f);
 		}
 		
-		request.setAttribute("listCandidates", listAllCandidates);
-		RequestDispatcher rd=request.getRequestDispatcher("/jsp/insert.jsp");
+		request.setAttribute("added", listCandidates);
+		RequestDispatcher rd=request.getRequestDispatcher("/jsp/inserted.jsp");
 		rd.forward(request, response);
     
 	}
