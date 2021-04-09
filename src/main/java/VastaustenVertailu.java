@@ -5,7 +5,9 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-	
+import data.Kysymykset;
+
+
 @WebServlet(
 	name = "VastaustenVertailu", 
 	urlPatterns = { "/vastaustenVertailu"}
@@ -16,15 +18,15 @@ public class VastaustenVertailu extends HttpServlet {
 
 
 	@Override
-	public void doGet(HttpServletRequest request, HttpServletResponse response) 
+	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 		throws IOException, ServletException {
 
 	response.setContentType("text/plain");
 	response.setCharacterEncoding("UTF-8");
 	
-	ArrayList<Integer> vastaukset = new ArrayList<Integer>();
-	ArrayList<String> kysymykset = request.getParameter("kysymykset");
+
 	
+
 	
 	
 	

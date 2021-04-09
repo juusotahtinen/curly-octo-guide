@@ -7,7 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import javax.servlet.http.HttpSession;
 
 import dao.DaoAnswers;
 import data.Kysymykset;
@@ -38,10 +38,7 @@ public class HelloAppEngine extends HttpServlet {
     RequestDispatcher rd = request.getRequestDispatcher("jsp/GUI.jsp");
     rd.forward(request,  response);
     
-    request.setAttribute("kysymykset", list); // add to request
-    request.getSession().setAttribute("kysymykset", list); // add to session
-    this.getServletConfig().getServletContext().setAttribute("kysymykset", list); // add to application context
-    request.getRequestDispatcher("/vastaustenVertailu").forward(request, response);
+    
 
    
     
