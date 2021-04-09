@@ -8,6 +8,16 @@ public class Candidates {
 	private String puolue;
 	
 
+	public Candidates(String sukunimi, String etunimi, String puolue) {
+		this.sukunimi=sukunimi;
+		this.etunimi=etunimi;
+		this.puolue=puolue;
+	}
+
+	public Candidates() {
+
+	}
+
 	public int getEhdokas_id() {
 		return ehdokas_id;
 	}

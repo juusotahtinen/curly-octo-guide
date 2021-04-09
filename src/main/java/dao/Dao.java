@@ -1,19 +1,15 @@
 package dao;
 
 import java.sql.DriverManager;
-
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
-
 import data.Candidates;
-
-
 import java.sql.Connection;
+
+
 
 public class Dao {
 	private String url;
@@ -50,8 +46,8 @@ public class Dao {
             conn.close();
         }
     }
-	public List<Candidates> listAllCandidates() throws SQLException {
-        List<Candidates> listCandidates = new ArrayList<>();
+	public ArrayList<Candidates> listAllCandidates() throws SQLException {
+        ArrayList<Candidates> listCandidates = new ArrayList<>();
          
         String sql = "SELECT * FROM ehdokkaat";
          
@@ -74,21 +70,6 @@ public class Dao {
         return listCandidates;
 	}
 	
-	public boolean insertCandidate(Candidates candidates) throws SQLException {
-        String sql = "INSERT INTO ehdokkaat (sukunimi, etunimi, puolue) VALUES (?, ?, ?)";
-        getConnection();
-         
-        PreparedStatement statement = conn.prepareStatement(sql);
-        statement.setString(1, candidates.getSukunimi());
-        statement.setString(2, candidates.getEtunimi());
-        statement.setString(3, candidates.getPuolue());
-         
-        boolean rowInserted = statement.executeUpdate() > 0;
-        statement.close();
-        disconnect();
-        return rowInserted;
-    }
-	
 	public Candidates readCandidates(String ehdokas_id) {
 		Candidates f=null;
 		try {
@@ -109,6 +90,23 @@ public class Dao {
 			return null;
 		}
 	}
+	
+	public ArrayList<Candidates> insertCandidates(Candidates f) {
+		try {
+			String sql="INSERT INTO ehdokkaat(sukunimi, etunimi, puolue) VALUES" + "('"+f.getSukunimi()+"', '"+f.getEtunimi()+"', '"+f.getPuolue()+"')";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, f.getSukunimi());
+			pstmt.setString(2, f.getEtunimi());
+			pstmt.setString(3, f.getPuolue());
+			pstmt.executeUpdate();
+			return insertCandidates(f);
+		}
+		catch(SQLException e) {
+			return null;
+		}
+	}
+	
+	
 	
 
 //	public ArrayList<Candidates> listAllCandidates() {
