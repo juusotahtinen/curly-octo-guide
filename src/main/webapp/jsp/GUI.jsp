@@ -21,7 +21,7 @@
   	<h1> VAALIKONE</h1>
   	<h2>Vastaa seuraaviin kysymyksiin niin saat tietää itsellesi parhaiten sopivan ehdokkaan</h2>
   	
-  	<form NAME="vastaukset" ACTION="" METHOD="POST">
+  	<form NAME="vastaukset" ACTION="/vastaustenVertailu" METHOD="POST">
   		<% 
 		ArrayList<Kysymykset> kysymykset = (ArrayList<Kysymykset>)request.getAttribute("kysymykset");
   		
@@ -32,12 +32,15 @@
   		out.println(k.getId() + ": " + k.getKysymys());
 		%>
 		<br>
-  		<input type = "radio" name = "radios<%out.println(i); %>" value = "vastaus1">
-  		<input type = "radio" name = "radios<%out.println(i); %>" value = "vastaus2">
-  		<input type = "radio" name = "radios<%out.println(i); %>" value = "vastaus3">
-  		<input type = "radio" name = "radios<%out.println(i); %>" value = "vastaus4">
-  		<input type = "radio" name = "radios<%out.println(i); %>" value = "vastaus5">
+		<br>
+  		<input type = "radio" name = "radios<%out.println(i); %>" value = "1"> Täysin eri mieltä
+  		<input type = "radio" name = "radios<%out.println(i); %>" value = "2"> Lähes eri mieltä
+  		<input type = "radio" name = "radios<%out.println(i); %>" value = "3"> En osaa sanoa
+  		<input type = "radio" name = "radios<%out.println(i); %>" value = "4"> Lähes samaa mieltä
+  		<input type = "radio" name = "radios<%out.println(i); %>" value = "5"> Täysin samaa mieltä
   		<br>
+  		<br>
+  		<hr>
   		<% }%>
   		<input type = "submit" value="lähetä" >
   		

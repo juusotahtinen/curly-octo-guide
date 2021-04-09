@@ -7,22 +7,17 @@ import data.Kysymykset;
 
 
 public class DaoAnswers {
+
+	private String dbURL;
+	private String username;
+	private String password;
 	
-	String dbURL = "jdbc:mysql://localhost:3306/vaalikone";
-	String username = "pena";
-	String password = "kukkuu";
-	Connection conn = null;
-	
-//	private String dbURL;
-//	private String username;
-//	private String password;
-	
-//	public Dao(String string, String string2, String string3) {
-//		this.dbURL = string;
-//		this.username = string2;
-//		this.password = string3;
-//		
-//	}
+	public DaoAnswers(String dbURL, String username, String password) {
+		this.dbURL = dbURL;
+		this.username = username;
+		this.password = password;
+		
+	}
 	
 	
 	

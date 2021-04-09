@@ -29,7 +29,7 @@ public class HelloAppEngine extends HttpServlet {
     response.setContentType("text/plain");
     response.setCharacterEncoding("UTF-8");
 
-    dao = new DaoAnswers();
+    dao = new DaoAnswers("jdbc:mysql://localhost:3306/vaalikone", "pena", "kukkuu");
 
     ArrayList<Kysymykset> list = dao.Select();
     
@@ -37,6 +37,12 @@ public class HelloAppEngine extends HttpServlet {
     
     RequestDispatcher rd = request.getRequestDispatcher("jsp/GUI.jsp");
     rd.forward(request,  response);
+    
+    request.setAttribute("kysymykset", list); // add to request
+    request.getSession().setAttribute("kysymykset", list); // add to session
+    this.getServletConfig().getServletContext().setAttribute("kysymykset", list); // add to application context
+    request.getRequestDispatcher("/vastaustenVertailu").forward(request, response);
+
    
     
     
