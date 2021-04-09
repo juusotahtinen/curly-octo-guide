@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,8 +14,9 @@ import data.Candidates;
 
 
 
-@WebServlet("/showcandidates")
-public class ShowCandidates extends HttpServlet {
+
+@WebServlet("/addcandidates")
+public class AddCandidates extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Dao dao=null;
 	
@@ -30,19 +30,17 @@ public class ShowCandidates extends HttpServlet {
         doGet(request, response);
     }
  
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-        List<Candidates> listCandidates = null;
-		try {
-			listCandidates = dao.listAllCandidates();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String ehdokas_id=request.getParameter("ehdokas_id");
+		Candidates f=null;
+		if (dao.getConnection()) {
+			f=dao.readCandidates(ehdokas_id);
 		}
-        request.setAttribute("listCandidates", listCandidates);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/showcandidates.jsp");
-        dispatcher.forward(request, response);
-    }
+		request.setAttribute("ehdokas", f);
+		
+		RequestDispatcher rd=request.getRequestDispatcher("/jsp/addcandidates.jsp");
+		rd.forward(request, response);
+	}
     
 }

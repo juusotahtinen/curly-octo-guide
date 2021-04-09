@@ -67,19 +67,50 @@ public class Dao {
 			f.setEtunimi(resultSet.getString("etunimi"));
 			f.setPuolue(resultSet.getString("puolue"));
 			listCandidates.add(f);
-             
-
-
-        }
-         
+        }  
         resultSet.close();
-        statement.close();
-         
-        disconnect();
-         
+        statement.close(); 
+        disconnect(); 
         return listCandidates;
 	}
 	
+	public boolean insertCandidate(Candidates candidates) throws SQLException {
+        String sql = "INSERT INTO ehdokkaat (sukunimi, etunimi, puolue) VALUES (?, ?, ?)";
+        getConnection();
+         
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setString(1, candidates.getSukunimi());
+        statement.setString(2, candidates.getEtunimi());
+        statement.setString(3, candidates.getPuolue());
+         
+        boolean rowInserted = statement.executeUpdate() > 0;
+        statement.close();
+        disconnect();
+        return rowInserted;
+    }
+	
+	public Candidates readCandidates(String ehdokas_id) {
+		Candidates f=null;
+		try {
+			String sql="select * from ehdokkaat where ehdokas_id=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, ehdokas_id);
+			ResultSet RS=pstmt.executeQuery();
+			while (RS.next()){
+				f=new Candidates();
+				f.setEhdokas_id(RS.getInt("ehdokas_id"));
+				f.setSukunimi(RS.getString("sukunimi"));
+				f.setEtunimi(RS.getString("etunimi"));
+				f.setPuolue(RS.getString("puolue"));
+			}
+			return f;
+		}
+		catch(SQLException e) {
+			return null;
+		}
+	}
+	
+
 //	public ArrayList<Candidates> listAllCandidates() {
 //		ArrayList<Candidates> listAllCandidates=new ArrayList<>();
 //		try {

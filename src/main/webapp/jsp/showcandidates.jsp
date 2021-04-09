@@ -14,9 +14,15 @@
 
 </head>
 <body>
+	<center>
+        <h1>Ehdokasluettelo</h1>
+        <h2>
+            <a href="/addcandidates">Lisää uusi ehdokas</a>
+        </h2>
+    </center>
 <div class = "container">
 		
-	<h1>Ehdokasluettelo</h1>
+	
 	<hr/>
 		
 		
@@ -30,7 +36,7 @@
 			</tr>
 
 			<c:forEach var="listCandidates" items="${listCandidates}" >
-			<tr>
+				<tr>
 					<td>${listCandidates.sukunimi}</td>
 					<td>${listCandidates.etunimi}</td>
 					<td>${listCandidates.puolue}</td>
