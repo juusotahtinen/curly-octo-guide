@@ -1,19 +1,15 @@
 package dao;
 
 import java.sql.DriverManager;
-
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
-
 import data.Candidates;
-
-
 import java.sql.Connection;
+
+
 
 public class Dao {
 	private String url;
@@ -50,8 +46,8 @@ public class Dao {
             conn.close();
         }
     }
-	public List<Candidates> listAllCandidates() throws SQLException {
-        List<Candidates> listCandidates = new ArrayList<>();
+	public ArrayList<Candidates> listAllCandidates() throws SQLException {
+        ArrayList<Candidates> listCandidates = new ArrayList<>();
          
         String sql = "SELECT * FROM ehdokkaat";
          
@@ -67,19 +63,58 @@ public class Dao {
 			f.setEtunimi(resultSet.getString("etunimi"));
 			f.setPuolue(resultSet.getString("puolue"));
 			listCandidates.add(f);
-             
+        }  
 
-
-        }
-         
-        resultSet.close();
-        statement.close();
-         
-        disconnect();
-         
         return listCandidates;
 	}
 	
+	public Candidates readCandidates(String ehdokas_id) {
+		Candidates f=null;
+		try {
+			String sql="select * from ehdokkaat where ehdokas_id=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, ehdokas_id);
+			ResultSet RS=pstmt.executeQuery();
+			while (RS.next()){
+				f=new Candidates();
+				f.setEhdokas_id(RS.getInt("ehdokas_id"));
+				f.setSukunimi(RS.getString("sukunimi"));
+				f.setEtunimi(RS.getString("etunimi"));
+				f.setPuolue(RS.getString("puolue"));
+			}
+			return f;
+		}
+		catch(SQLException e) {
+			return null;
+		}
+	}
+	
+	public ArrayList<Candidates> insert(Candidates f) {
+		try {
+			String sql="insert into ehdokkaat(sukunimi, etunimi, puolue, kotipaikkakunta, ika, miksi_eduskuntaan, mita_asioita_haluat_edistaa, ammatti)values(?, ?, ?, ?, ?, ?, ?, ?)";
+			getConnection();
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+
+			pstmt.setString(1, f.getSukunimi());
+			pstmt.setString(2, f.getEtunimi());
+			pstmt.setString(3, f.getPuolue());
+			pstmt.setString(4, f.getKotipaikkakunta());
+			pstmt.setInt(5, f.getIka());
+			pstmt.setString(6, f.getMiksi_eduskuntaan());
+			pstmt.setString(7, f.getMita_asioita_haluat_edistaa());
+			pstmt.setString(8, f.getAmmatti());
+					
+			pstmt.executeUpdate();
+			return listAllCandidates();
+		}
+		catch(SQLException e) {
+			return null;
+		}
+	}
+	
+	
+	
+
 //	public ArrayList<Candidates> listAllCandidates() {
 //		ArrayList<Candidates> listAllCandidates=new ArrayList<>();
 //		try {
