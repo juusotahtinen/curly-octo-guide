@@ -38,21 +38,31 @@
   		Kysymykset k=kysymykset.get(i);
   		%>
   		<h3><% out.println(k.getId() + ": " + k.getKysymys());%></h3>
-  		<div class="col-sm-1">
+  		<div class="row">
+  		<div class="col-sm-2">
 		<label>Täysin eri mieltä </label> 
   		<input id="option1" type = "radio" name = "radios<%=i%>" value = "1">
   		</div>
+  		<div class="col-sm-2">
   		<label>Täysin eri mieltä </label> 
   		<input id="option2" type = "radio" name = "radios<%=i%>" value = "2">
+  		</div>
+  		<div class="col-sm-2">
   		<label>Täysin eri mieltä </label> 
   		<input id="oprion3" type = "radio" name = "radios<%=i%>" value = "3">
+  		</div>
+  		<div class="col-sm-2">
   		<label>Täysin eri mieltä </label> 
   		<input id="option4" type = "radio" name = "radios<%=i%>" value = "4"> 
+  		</div>
+  		<div class="col-sm-2">
   		<label>Täysin eri mieltä </label> 
   		<input id="option5" type = "radio" name = "radios<%=i%>" value = "5"> 
+  		</div>
 
   		<br>
   		<br>
+  		</div>
   		<% 
   		
   		}
