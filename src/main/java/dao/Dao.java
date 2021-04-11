@@ -91,11 +91,19 @@ public class Dao {
 	
 	public ArrayList<Candidates> insert(Candidates f) {
 		try {
-			String sql="insert into ehdokkaat(sukunimi, etunimi, puolue)values" + "('"+f.getSukunimi()+"', '"+f.getEtunimi()+"', '"+f.getPuolue()+"')";
+			String sql="insert into ehdokkaat(sukunimi, etunimi, puolue, kotipaikkakunta, ika, miksi_eduskuntaan, mita_asioita_haluat_edistaa, ammatti)values(?, ?, ?, ?, ?, ?, ?, ?)";
+			getConnection();
 			PreparedStatement pstmt=conn.prepareStatement(sql);
+
 			pstmt.setString(1, f.getSukunimi());
 			pstmt.setString(2, f.getEtunimi());
 			pstmt.setString(3, f.getPuolue());
+			pstmt.setString(4, f.getKotipaikkakunta());
+			pstmt.setInt(5, f.getIka());
+			pstmt.setString(6, f.getMiksi_eduskuntaan());
+			pstmt.setString(7, f.getMita_asioita_haluat_edistaa());
+			pstmt.setString(8, f.getAmmatti());
+					
 			pstmt.executeUpdate();
 			return listAllCandidates();
 		}

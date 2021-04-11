@@ -32,11 +32,18 @@ public class InsertCandidates extends HttpServlet {
 	}
 	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 	     throws IOException, ServletException {
+		
+
 		String sukunimi=request.getParameter("sukunimi");
 		String etunimi=request.getParameter("etunimi");
 		String puolue=request.getParameter("puolue");
+		String kotipaikkakunta=request.getParameter("kotipaikkakunta");
+		int ika=Integer.parseInt(request.getParameter("ika"));
+		String miksi_eduskuntaan=request.getParameter("miksi_eduskuntaan");
+		String mita_asioita_haluat_edistaa=request.getParameter("mita_asioita_haluat_edistaa");
+		String ammatti=request.getParameter("ammatti");
 		
-		Candidates f=new Candidates(sukunimi, etunimi , puolue);
+		Candidates f=new Candidates(sukunimi, etunimi, puolue, kotipaikkakunta, ika, miksi_eduskuntaan, mita_asioita_haluat_edistaa, ammatti);
 		
 		ArrayList<Candidates> listCandidates=null;
 		if (dao.getConnection()) {
