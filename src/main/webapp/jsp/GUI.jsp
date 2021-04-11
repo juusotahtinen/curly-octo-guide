@@ -12,15 +12,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="/css/style.css">
   <HEAD>
     <TITLE>Vaalikone</TITLE>
   </HEAD>
 
   <BODY>
-  	<h1> VAALIKONE</h1>
+  <div class="container">
+
+  	<center><h1> VAALIKONE</h1></center>
   	<h2>Vastaa seuraaviin kysymyksiin niin saat tietää itsellesi parhaiten sopivan ehdokkaan</h2>
-  	
+
+
+
+
+  <div class="row">
+  <div class="col-sm-12">
   	<form NAME="vastaukset" ACTION="/vastaustenVertailu" METHOD="POST">
   		<% 
 		ArrayList<Kysymykset> kysymykset = (ArrayList<Kysymykset>)request.getAttribute("kysymykset");
@@ -28,18 +36,23 @@
   		for ( int i=0;i < kysymykset.size();i++){
   		
   		Kysymykset k=kysymykset.get(i);
-  		out.println(k.getId() + ": " + k.getKysymys());
-		%>
-		<br>
-		<br>
-  		<input type = "radio" name = "radios<%=i%>" value = "1"> Täysin eri mieltä
-  		<input type = "radio" name = "radios<%=i%>" value = "2"> Lähes eri mieltä
-  		<input type = "radio" name = "radios<%=i%>" value = "3"> En osaa sanoa
-  		<input type = "radio" name = "radios<%=i%>" value = "4"> Lähes samaa mieltä
-  		<input type = "radio" name = "radios<%=i%>" value = "5"> Täysin samaa mieltä
+  		%>
+  		<h3><% out.println(k.getId() + ": " + k.getKysymys());%></h3>
+  		<div class="col-sm-1">
+		<label>Täysin eri mieltä </label> 
+  		<input id="option1" type = "radio" name = "radios<%=i%>" value = "1">
+  		</div>
+  		<label>Täysin eri mieltä </label> 
+  		<input id="option2" type = "radio" name = "radios<%=i%>" value = "2">
+  		<label>Täysin eri mieltä </label> 
+  		<input id="oprion3" type = "radio" name = "radios<%=i%>" value = "3">
+  		<label>Täysin eri mieltä </label> 
+  		<input id="option4" type = "radio" name = "radios<%=i%>" value = "4"> 
+  		<label>Täysin eri mieltä </label> 
+  		<input id="option5" type = "radio" name = "radios<%=i%>" value = "5"> 
+
   		<br>
   		<br>
-  		<hr>
   		<% 
   		
   		}
@@ -48,11 +61,12 @@
   		
   		<input type = "submit" value="lähetä" >
 
-  		
   	</form>
-  	
-  	
+  	</div>
+  	</div>
+  	</div>
     
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>  
 
   </BODY>
 </HTML>

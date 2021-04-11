@@ -38,6 +38,9 @@ public class HelloAppEngine extends HttpServlet {
     RequestDispatcher rd = request.getRequestDispatcher("jsp/GUI.jsp");
     rd.forward(request,  response);
     
+    HttpSession session = request.getSession();
+    session.setAttribute("pituus", list.size());
+    
     
     
     
