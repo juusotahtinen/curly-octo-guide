@@ -1,7 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%@ page import="java.util.ArrayList" %>   
-<%@ page import="data.Candidates" %>   
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
     
@@ -35,16 +34,11 @@
 				<th>Toiminnot</th>
 			</tr>
 
-			<c:forEach var="listCandidates" items="${listCandidates}" >
+			<c:forEach var="showToUpdate" items="${showToUpdate}" >
 				<tr>
-					<td>${listCandidates.sukunimi}</td>
-					<td>${listCandidates.etunimi}</td>
-					<td>${listCandidates.puolue}</td>
-					<td> 
-					<a href='/readtoupdate?ehdokas_id=${listCandidates.ehdokas_id}'>Muokkaa</a> 
-					| 
-					<a href = "${pageContext.request.contextPath}/ShowCandidates?action=DELETE&id=${listCandidates.ehdokas_id}">Poista</a> 
-					</td>
+					<td>${showToUpdate.sukunimi}</td>
+					<td>${showToUpdate.etunimi}</td>
+					<td>${showToUpdate.puolue}</td>
 				</tr>
 			</c:forEach>
 		</table>
