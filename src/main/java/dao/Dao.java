@@ -1,26 +1,18 @@
 package dao;
 
 import java.sql.DriverManager;
-
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import data.Candidates;
 
 import java.io.IOException;
 import java.sql.Connection;
+
+
 
 public class Dao {
 	private String url;
@@ -57,8 +49,8 @@ public class Dao {
             conn.close();
         }
     }
-	public List<Candidates> listAllCandidates() throws SQLException {
-        List<Candidates> listCandidates = new ArrayList<>();
+	public ArrayList<Candidates> listAllCandidates() throws SQLException {
+        ArrayList<Candidates> listCandidates = new ArrayList<>();
          
         String sql = "SELECT * FROM ehdokkaat";
          
@@ -75,26 +67,10 @@ public class Dao {
 			f.setPuolue(resultSet.getString("puolue"));
 			listCandidates.add(f);
         }  
-        resultSet.close();
-        statement.close(); 
-        disconnect(); 
+
         return listCandidates;
 	}
 	
-	public boolean insertCandidate(Candidates candidates) throws SQLException {
-        String sql = "INSERT INTO ehdokkaat (sukunimi, etunimi, puolue) VALUES (?, ?, ?)";
-        getConnection();
-         
-        PreparedStatement statement = conn.prepareStatement(sql);
-        statement.setString(1, candidates.getSukunimi());
-        statement.setString(2, candidates.getEtunimi());
-        statement.setString(3, candidates.getPuolue());
-         
-        boolean rowInserted = statement.executeUpdate() > 0;
-        statement.close();
-        disconnect();
-        return rowInserted;
-    }
 	
 	public ArrayList<Candidates> getEhdokasInfo(String ehdokas_id) {
 		ArrayList<Candidates> candidateInfo = new ArrayList<Candidates>();
@@ -151,6 +127,54 @@ public class Dao {
 			return null;
 		}
 	}
+	
+	public ArrayList<Candidates> insert(Candidates f) {
+		try {
+			String sql="insert into ehdokkaat(sukunimi, etunimi, puolue, kotipaikkakunta, ika, miksi_eduskuntaan, mita_asioita_haluat_edistaa, ammatti)values(?, ?, ?, ?, ?, ?, ?, ?)";
+			getConnection();
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+
+			pstmt.setString(1, f.getSukunimi());
+			pstmt.setString(2, f.getEtunimi());
+			pstmt.setString(3, f.getPuolue());
+			pstmt.setString(4, f.getKotipaikkakunta());
+			pstmt.setInt(5, f.getIka());
+			pstmt.setString(6, f.getMiksi_eduskuntaan());
+			pstmt.setString(7, f.getMita_asioita_haluat_edistaa());
+			pstmt.setString(8, f.getAmmatti());
+					
+			pstmt.executeUpdate();
+			return listAllCandidates();
+		}
+		catch(SQLException e) {
+			return null;
+		}
+	}
+		
+	public ArrayList<Candidates> updateCandidates() throws SQLException {
+        ArrayList<Candidates> showToUpdate = new ArrayList<>();
+         
+        String sql = "SELECT * FROM ehdokkaat WHERE ehdokas_id=?";
+         
+        getConnection();
+         
+        Statement statement = conn.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+         
+        while (resultSet.next()) {
+        	Candidates r=new Candidates();
+			r.setEhdokas_id(resultSet.getInt("ehdokas_id"));
+			r.setSukunimi(resultSet.getString("sukunimi"));
+			r.setEtunimi(resultSet.getString("etunimi"));
+			r.setPuolue(resultSet.getString("puolue"));
+			showToUpdate.add(r);
+        }  
+
+        return showToUpdate;
+	}
+}
+	
+	
 	
 
 	
@@ -222,7 +246,7 @@ public class Dao {
 //			return null;
 //		}
 //	}
-}
+
 
 
 

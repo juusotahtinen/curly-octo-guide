@@ -20,51 +20,125 @@
             <a href="/showcandidates">Näytä kaikki ehdokkaat</a>
         </h2>
     </center>
-<div align="center">
-        <c:if test="${candidates != null}">
-            <form action="update" method="post">
-        </c:if>
-        <c:if test="${candidates == null}">
-            <form action="insert" method="post">
-        </c:if>
-        <table border="1" cellpadding="5">
-            <caption>
-                
-            </caption>
-                <c:if test="${candidates != null}">
-                    <input type="hidden" name="ehdokas_id" value="<c:out value='${candidates.ehdokas_id}' />" />
-                </c:if>           
-            <tr>
-                <th>Sukunimi: </th>
-                <td>
-                    <input type="text" name="sukunimi" size="45"
-                            value="<c:out value='${candidates.sukunimi}' />"
-                        />
-                </td>
-            </tr>
-            <tr>
-                <th>Etunimi: </th>
-                <td>
-                    <input type="text" name="etunimi" size="45"
-                            value="<c:out value='${candidates.etunimi}' />"
-                    />
-                </td>
-            </tr>
-            <tr>
-                <th>Puolue: </th>
-                <td>
-                    <input type="text" name="puolue" size="5"
-                            value="<c:out value='${candidates.puolue}' />"
-                    />
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2" align="center">
-                    <input type="submit" value="Tallenna" />
-                </td>
-            </tr>
-        </table>
-        </form>
+
+<div>
+
+  <div class="container">
+    <div class="row">
+     
+      <div class="col-lg-12" align="center">
+        <div class="card shadow-sm">
+          <div class="card-header bg-transparent border-0">
+            <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Syötä ehdokkaan tiedot</h3>
+          </div>
+          <div class="card-body pt-0"><form action='/inserted' method='post'>
+            <table class="table table-bordered">
+              <tr align="center">
+                <th align="center" width="50%" height="30px">Sukunimi</th>
+                <td width="2%">:</td>
+                <td align="center">
+				<input type='text' name='sukunimi' value='${requestScope.added.sukunimi}'><br></td>
+			 </tr>
+           </table>
+          </div>
+          
+          <div class="card-body pt-0">
+            <table class="table table-bordered">
+              <tr align="center">
+                <th align="center" width="50%" height="30px">Etunimi</th>
+                <td width="2%">:</td>
+                <td align="center">
+				<input type='text' name='etunimi' value='${requestScope.added.etunimi}'><br></td>
+			</tr>
+           </table>
+          </div>
+          
+          <div class="card-body pt-0">
+            <table class="table table-bordered">
+              <tr align="center">
+                <th align="center" width="50%" height="30px">Puolue</th>
+                <td width="2%">:</td>
+                <td align="center">
+				<input type='text' name='puolue' value='${requestScope.added.puolue}'><br></td>
+			</tr>
+           </table>
+          </div>
+          
+          <div class="card-body pt-0">
+            <table class="table table-bordered">
+              <tr align="center">
+                <th align="center" width="50%" height="30px">Kotipaikkakunta</th>
+                <td width="2%">:</td>
+                <td align="center">
+				<input type='text' name='kotipaikkakunta' value='${requestScope.added.kotipaikkakunta}'><br></td>
+			</tr>
+           </table>
+          </div>
+          
+          <div class="card-body pt-0">
+            <table class="table table-bordered">
+              <tr align="center">
+                <th align="center" width="50%" height="30px">Ikä</th>
+                <td width="2%">:</td>
+                <td align="center">
+				<input type='text' name='ika' value='${requestScope.added.ika}'><br></td>
+			</tr>
+           </table>
+          </div>
+          
+          <div class="card-body pt-0">
+            <table class="table table-bordered">
+              <tr align="center">
+                <th align="center" width="50%" height="30px">Miksi haluat eduskuntaan</th>
+                <td width="2%">:</td>
+                <td align="center">
+				<textarea rows="10" cols="40" input type='text' name='miksi_eduskuntaan' value='${requestScope.added.miksi_eduskuntaan}'></textarea>
+			</tr>
+           </table>
+          </div>
+          
+          <div class="card-body pt-0">
+            <table class="table table-bordered">
+              <tr align="center">
+                <th align="center" width="50%" height="30px">Mitä asioita haluat edistää</th>
+                <td width="2%">:</td>
+                <td align="center" height="300px">
+                <textarea rows="10" cols="40" input type='text' name='mita_asioita_haluat_edistaa' value='${requestScope.added.mita_asioita_haluat_edistaa}'></textarea>	
+			</tr>
+           </table>
+          </div>
+          
+          <div class="card-body pt-0">
+            <table class="table table-bordered">
+              <tr align="center">
+                <th align="center" width="50%" height="30px">Ammatti</th>
+                <td width="2%">:</td>
+                <td align="center">
+				<input type='text' name='ammatti' value='${requestScope.added.ammatti}'><br></td>
+			</tr>
+           </table>
+          </div>
+          
+          <div class="card-body pt-0">
+            <table class="table table-bordered">
+              <tr align="center">
+
+
+                <td align="center">
+				<input type='submit' name='ok' value='Send'> 
+			</tr>
+           </table>
+          </div>
+         </tr>
+           </table>
+          </div>
+        </div> 
+         </form>
     </div>
+    </div>
+    </div>
+              
+              
+   
 </body>
 </html>
