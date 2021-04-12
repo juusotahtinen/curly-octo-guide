@@ -11,24 +11,6 @@ public class Candidates {
 	private String miksi_eduskuntaan;
 	private String mita_asioita_haluat_edistaa;
 	private String ammatti;
-	
-
-	public Candidates(String sukunimi, String etunimi, String puolue, String kotipaikkakunta, int ika, String miksi_eduskuntaan, String mita_asioita_haluat_edistaa, String ammatti) {
-
-		this.sukunimi=sukunimi;
-		this.etunimi=etunimi;
-		this.puolue=puolue;
-		this.kotipaikkakunta=kotipaikkakunta;
-		this.ika=ika;
-		this.miksi_eduskuntaan=miksi_eduskuntaan;
-		this.mita_asioita_haluat_edistaa=mita_asioita_haluat_edistaa;
-		this.ammatti=ammatti;
-	}
-
-	public Candidates() {
-
-	}
-
 
 	public int getEhdokas_id() {
 		return ehdokas_id;
