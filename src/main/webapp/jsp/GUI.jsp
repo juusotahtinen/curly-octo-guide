@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="/css/style.css">
   <HEAD>
     <TITLE>Vaalikone</TITLE>
@@ -27,9 +27,10 @@
 
 
 
-  <div class="row">
+<div class="row">
   <div class="col-sm-12">
   	<form NAME="vastaukset" ACTION="/vastaustenVertailu" METHOD="POST">
+  		<fieldset>
   		<% 
 		ArrayList<Kysymykset> kysymykset = (ArrayList<Kysymykset>)request.getAttribute("kysymykset");
 		
@@ -37,46 +38,57 @@
   		
   		Kysymykset k=kysymykset.get(i);
   		%>
-  		<h3><% out.println(k.getId() + ": " + k.getKysymys());%></h3>
-  		<div class="row">
-  		<div class="col-sm-2">
-		<label>Täysin eri mieltä </label> 
-  		<input id="option1" type = "radio" name = "radios<%=i%>" value = "1">
+  		<h3><% out.println(k.getId()+"/"+kysymykset.size()); %></h3>
+  		<h4><% out.println(k.getKysymys());%></h4>
+		
+		<div class="row justify-content-md-center">
+		<div class="col-md-2">
+  		<label> Täysin samaa mieltä</label>
   		</div>
-  		<div class="col-sm-2">
-  		<label>Täysin eri mieltä </label> 
-  		<input id="option2" type = "radio" name = "radios<%=i%>" value = "2">
+  		<div class="col-md-2">
+  		<label>En osaa sanoa</label>
   		</div>
-  		<div class="col-sm-2">
-  		<label>Täysin eri mieltä </label> 
-  		<input id="oprion3" type = "radio" name = "radios<%=i%>" value = "3">
+  		<div class="col-md-2">
+  		<label>Täysin samaa mieltä</label>
   		</div>
-  		<div class="col-sm-2">
-  		<label>Täysin eri mieltä </label> 
-  		<input id="option4" type = "radio" name = "radios<%=i%>" value = "4"> 
   		</div>
-  		<div class="col-sm-2">
-  		<label>Täysin eri mieltä </label> 
-  		<input id="option5" type = "radio" name = "radios<%=i%>" value = "5"> 
+  		<div class="row justify-content-md-center">
+		<div class="col-sm-1">
+  		<input class="form-check-input" type = "radio" name = "radios<%=i%>" value = "1">
+  		</div>
+  		<div class="col-sm-1">
+  		<input class="form-check-input" type = "radio" name = "radios<%=i%>" value = "2">
+  		</div>
+  		<div class="col-sm-1">
+  		<input class="form-check-input" type = "radio" name = "radios<%=i%>" value = "3">
+  		</div>
+  		<div class="col-sm-1">
+  		<input class="form-check-input" type = "radio" name = "radios<%=i%>" value = "4"> 
+  		</div>
+  		<div class="col-sm-1">
+  		<input class="form-check-input" type = "radio" name = "radios<%=i%>" value = "5"> 
   		</div>
 
   		<br>
   		<br>
-  		</div>
+
+
+		</div>
   		<% 
-  		
+		 
+		
   		}
 
   		%>
-  		
-  		<input type = "submit" value="lähetä" >
-
+  		<br>
+  		<input type = "submit" value="Lähetä vastauksesi" >
+	</fieldset>	
   	</form>
-  	</div>
-  	</div>
+	</div>
+	</div>
   	</div>
     
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>  
+
 
   </BODY>
 </HTML>

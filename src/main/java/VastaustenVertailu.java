@@ -28,14 +28,25 @@ public class VastaustenVertailu extends HttpServlet {
 	
 	HttpSession session=request.getSession(false);
 	int size = (int) session.getAttribute("pituus");
-	
+	int vastaus = 0;
 	
 	for (int i=0;i<size;i++) {
 		
 		String param = "radios" + i;
 		String vastausString = request.getParameter(param);
-		int vastaus = Integer.parseInt(vastausString);
-		kayttajanVastaukset.add(vastaus);
+		if (vastausString == null) {
+			
+			vastaus = 0;
+			kayttajanVastaukset.add(vastaus);
+			
+		}
+		else {
+			
+			vastaus = Integer.parseInt(vastausString);
+			kayttajanVastaukset.add(vastaus);
+			
+		}
+
 	}
 	
 	
