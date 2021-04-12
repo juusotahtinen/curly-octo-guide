@@ -12,17 +12,6 @@ public class Candidates {
 	private String mita_asioita_haluat_edistaa;
 	private String ammatti;
 
-	
-
-	public Candidates(String sukunimi, String etunimi, String puolue, String kotipaikkakunta, int ika,
-			String miksi_eduskuntaan, String mita_asioita_haluat_edistaa, String ammatti) {
-		// TODO Auto-generated constructor stub
-	}
-
-	public Candidates() {
-		// TODO Auto-generated constructor stub
-	}
-
 	public int getEhdokas_id() {
 		return ehdokas_id;
 	}
