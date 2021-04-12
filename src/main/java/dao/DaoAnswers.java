@@ -1,23 +1,25 @@
 package dao;
 
 import java.sql.*;
-import java.util.ArrayList;
-
-import data.Kysymykset;
 
 
 public class DaoAnswers {
-
-	private String dbURL;
-	private String username;
-	private String password;
 	
-	public DaoAnswers(String dbURL, String username, String password) {
-		this.dbURL = dbURL;
-		this.username = username;
-		this.password = password;
-		
-	}
+	String dbURL = "jdbc:mysql://localhost:3306/vaalikone";
+	String username = "pena";
+	String password = "kukkuu";
+	Connection conn = null;
+	
+//	private String dbURL;
+//	private String username;
+//	private String password;
+	
+//	public Dao(String string, String string2, String string3) {
+//		this.dbURL = string;
+//		this.username = string2;
+//		this.password = string3;
+//		
+//	}
 	
 	
 	
@@ -62,9 +64,7 @@ public class DaoAnswers {
 		
 	}
 	
-	public ArrayList<Kysymykset> Select() {
-		
-		ArrayList<Kysymykset> list = new ArrayList<Kysymykset>();
+	public void Select() {
 		 
 		try {
 			
@@ -78,7 +78,7 @@ public class DaoAnswers {
 		    Connection conn = DriverManager.getConnection(dbURL, username, password);
 
 			
-			String sql2 = "SELECT * FROM kysymykset";
+			String sql2 = "SELECT * FROM ehdokkaat";
 			 
 			Statement statement2 = conn.createStatement();
 			ResultSet result = statement2.executeQuery(sql2);
@@ -86,22 +86,21 @@ public class DaoAnswers {
 
 			 
 			while (result.next()){
-				Kysymykset k = new Kysymykset();
-				k.setId(result.getInt("KYSYMYS_ID"));
-				k.setKysymys(result.getString("KYSYMYS"));
-				list.add(k);
-
+			    String id = result.getString(1);
+			    String sukunimi = result.getString(2);
+			    String etunimi = result.getString("ETUNIMI");
+			    String puolue = result.getString("PUOLUE");
+			 
+			    String output = "%s - %s - %s - %s";
 			    
+			    System.out.println(String.format(output, id, sukunimi, etunimi, puolue));
 			}
-			return list;
 			
 			
 			
 		} catch (SQLException ex) {
-		    return null;
+		    ex.printStackTrace();
 		}
-
-
 	}
 	
 	public void Update() {
