@@ -11,15 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.DaoAnswers;
-import data.Kysymykset;
 import data.Vastaukset;
 
 
+
 @WebServlet(
-    name = "HelloAppEngine",
-    urlPatterns = {"/hello"}
+    name = "EhdokkaidenVastaukset",
+    urlPatterns = {"/ehdokkaidenVastaukset"}
 )
-public class HelloAppEngine extends HttpServlet {
+public class EhdokkaidenVastaukset extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private DaoAnswers dao = null; 
 	
@@ -33,36 +33,17 @@ public class HelloAppEngine extends HttpServlet {
 
     dao = new DaoAnswers("jdbc:mysql://localhost:3306/vaalikone", "pena", "kukkuu");
 
-    ArrayList<Kysymykset> list = dao.Select();
+    ArrayList<Vastaukset> list = dao.SelectEhdokkaat();
     
-    request.setAttribute("kysymykset", list);
+request.setAttribute("vastaukset", list);
     
-    RequestDispatcher rd = request.getRequestDispatcher("jsp/GUI.jsp");
+    RequestDispatcher rd = request.getRequestDispatcher("/vastaustenVertailu");
     rd.forward(request,  response);
-    
-    HttpSession session = request.getSession();
-    session.setAttribute("pituus", list.size());
-    
-    ArrayList<Vastaukset> list1 = dao.SelectEhdokkaat();
-    
-    session.setAttribute("vastaukset", list1);
-        
-
-    
-    
-    
-
    
     
     
-    
-	
-	
-	
-    
-    
-
-
   }
+  
 }
-
+    
+    

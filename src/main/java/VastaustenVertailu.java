@@ -1,5 +1,6 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
@@ -49,8 +50,43 @@ public class VastaustenVertailu extends HttpServlet {
 
 	}
 	
+	response.getWriter().println(session.getAttribute("vastaukset"));
 	
-	response.getWriter().println(kayttajanVastaukset);
+//	ArrayList<List> tulokset = new ArrayList<List>();
+//	   
+//    //Tehd‰‰n erotus k‰ytt‰j‰n ja ehdokkaan vastauksille ja lis‰t‰‰n tulokset "erotusKayttajaEhdokas" -listaan
+//    for (int i =0; i< Ehdokkaat.size(); i++){
+//    	ArrayList<Integer> current = (ArrayList<Integer>) Ehdokkaat.get(i);
+//    	ArrayList<Integer> tulos = new ArrayList<Integer>();
+//    	
+//
+//    	 for (int j =0; j< current.size(); j++){
+//    	    	
+//    	    	int vertailu= Math.abs(kayttajanVastaukset.get(j) - current.get(j));
+//    	    	tulos.add(vertailu);
+//    	    }
+//    	tulokset.add(tulos);
+//    }
+//    
+//  
+//   
+//    
+//    ArrayList<Integer> sopivuus = new ArrayList<Integer>();
+//    
+//    int sum=0;
+//    for (int i =0; i< tulokset.size(); i++){
+//    	ArrayList<Integer> current = (ArrayList<Integer>) tulokset.get(i);
+//    	
+//    	for (int j=0; j<current.size(); j++) {
+//    	
+//    		sum = current.stream().mapToInt(Integer::intValue).sum();
+//    		
+//    	}
+//    	sopivuus.add(sum);
+//    	
+//    }
+//    
+//    System.out.println(sopivuus);
 	
 	
 	
