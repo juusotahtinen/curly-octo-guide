@@ -1,0 +1,56 @@
+
+h4{
+width: 300px;
+padding: 25px;
+margin: auto;
+
+background: rgba(124, 198, 198, 0.47);
+
+
+
+color: #000000;
+}
+
+h2{
+	width: 600px;
+	padding: 25px;
+	margin: auto;
+	font-size: 18px;
+	text-align:center;
+}
+.col-sm-12{
+	padding: 20px;
+}
+
+.container{
+	padding: 20px;
+}
+
+.group{
+	display: inline-block;
+}
+
+fieldset{
+	text-align:center;
+}
+
+.col-md-2{
+	padding:20px;
+}
+
+h3{
+	width: 100px;
+	padding: 5px;
+	margin: auto;
+	background: #7CC6C6;
+	border:10px solid white;
+	
+}
+
+label{
+	
+	font-size:18px;
+
+}
+
+

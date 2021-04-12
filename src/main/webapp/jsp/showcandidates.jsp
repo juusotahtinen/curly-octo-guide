@@ -12,6 +12,7 @@
 <title>Vaalikone</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
+
 </head>
 <body>
 	<center>
@@ -29,6 +30,7 @@
 		<table class = "table table-striped table-bordered">
 			
 			<tr class = "thead-dark">
+				<th>ID</th>
 				<th>Sukunimi</th>
 				<th>Etunimi</th>
 				<th>Puolue</th>
@@ -37,13 +39,14 @@
 
 			<c:forEach var="listCandidates" items="${listCandidates}" >
 				<tr>
+					<td>${listCandidates.ehdokas_id}</td>
 					<td>${listCandidates.sukunimi}</td>
 					<td>${listCandidates.etunimi}</td>
 					<td>${listCandidates.puolue}</td>
 					<td> 
-					<a href = "${pageContext.request.contextPath}/showcandiinfo1?ehdokas_id=${listCandidates.ehdokas_id}">Muokkaa</a>
+					<a href = "${pageContext.request.contextPath}/showcandiinfo1?ehdokas_id=${listCandidates.ehdokas_id}">Näytä tiedot</a>
 					| 
-					<a href = "${pageContext.request.contextPath}/ShowCandidates?action=DELETE&id=${listCandidates.ehdokas_id}">Poista</a> 
+ 					<a href = "${pageContext.request.contextPath}/deletecandiinfo1?ehdokas_id=${listCandidates.ehdokas_id}">Poista</a> 
 					</td>
 				</tr>
 			</c:forEach>
