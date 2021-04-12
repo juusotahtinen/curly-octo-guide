@@ -10,9 +10,16 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import data.Candidates;
 
-
+import java.io.IOException;
 import java.sql.Connection;
 
 public class Dao {
@@ -89,6 +96,39 @@ public class Dao {
         return rowInserted;
     }
 	
+	public ArrayList<Candidates> getEhdokasInfo(String ehdokas_id) {
+		ArrayList<Candidates> candidateInfo = new ArrayList<Candidates>();
+		try {
+			String sql="select * from ehdokkaat where ehdokas_id=?";
+			getConnection();
+	         
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, ehdokas_id);
+	        ResultSet RS = statement.executeQuery();
+
+			while (RS.next()){
+				Candidates p=new Candidates();
+				p.setEhdokas_id(RS.getInt("ehdokas_id"));
+				p.setSukunimi(RS.getString("sukunimi"));
+				p.setEtunimi(RS.getString("etunimi"));
+				p.setPuolue(RS.getString("puolue"));
+				p.setKotipaikkakunta(RS.getString("kotipaikkakunta"));
+				p.setIka(RS.getInt("ika"));
+				p.setMiksi_eduskuntaan(RS.getString("miksi_eduskuntaan"));
+				p.setMita_asioita_haluat_edistaa(RS.getString("mita_asioita_haluat_edistaa"));
+				p.setAmmatti(RS.getString("ammatti"));
+				candidateInfo.add(p);
+			}
+			return candidateInfo;
+		}
+		
+		
+		catch(SQLException e) {
+			return null;
+		}
+	}	
+	
+
 	public Candidates readCandidates(String ehdokas_id) {
 		Candidates f=null;
 		try {
@@ -105,12 +145,15 @@ public class Dao {
 			}
 			return f;
 		}
+	
+	
 		catch(SQLException e) {
 			return null;
 		}
 	}
 	
 
+	
 //	public ArrayList<Candidates> listAllCandidates() {
 //		ArrayList<Candidates> listAllCandidates=new ArrayList<>();
 //		try {
