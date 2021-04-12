@@ -44,7 +44,7 @@
 					<td>${listCandidates.etunimi}</td>
 					<td>${listCandidates.puolue}</td>
 					<td> 
-					<a href = "${pageContext.request.contextPath}/showcandiinfo1?ehdokas_id=${listCandidates.ehdokas_id}">Muokkaa</a>
+					<a href = "${pageContext.request.contextPath}/showcandiinfo1?ehdokas_id=${listCandidates.ehdokas_id}">Näytä tiedot</a>
 					| 
  					<a href = "${pageContext.request.contextPath}/deletecandiinfo1?ehdokas_id=${listCandidates.ehdokas_id}">Poista</a> 
 					</td>
