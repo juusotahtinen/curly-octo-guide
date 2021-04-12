@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import data.Candidates;
+
+
 import java.sql.Connection;
 
 
@@ -68,6 +70,7 @@ public class Dao {
         return listCandidates;
 	}
 	
+	
 	public Candidates readCandidates(String ehdokas_id) {
 		Candidates f=null;
 		try {
@@ -111,6 +114,29 @@ public class Dao {
 			return null;
 		}
 	}
+		
+	public ArrayList<Candidates> updateCandidates() throws SQLException {
+        ArrayList<Candidates> showToUpdate = new ArrayList<>();
+         
+        String sql = "SELECT * FROM ehdokkaat WHERE ehdokas_id=?";
+         
+        getConnection();
+         
+        Statement statement = conn.createStatement();
+        ResultSet resultSet = statement.executeQuery(sql);
+         
+        while (resultSet.next()) {
+        	Candidates r=new Candidates();
+			r.setEhdokas_id(resultSet.getInt("ehdokas_id"));
+			r.setSukunimi(resultSet.getString("sukunimi"));
+			r.setEtunimi(resultSet.getString("etunimi"));
+			r.setPuolue(resultSet.getString("puolue"));
+			showToUpdate.add(r);
+        }  
+
+        return showToUpdate;
+	}
+}
 	
 	
 	
@@ -183,7 +209,7 @@ public class Dao {
 //			return null;
 //		}
 //	}
-}
+
 
 
 
