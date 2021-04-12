@@ -101,7 +101,26 @@ public class Dao {
 		catch(SQLException e) {
 			return null;
 		}
-	}	
+	}
+	
+	public ArrayList<Candidates> deleteEhdokasInfo(String ehdokas_id) {
+		ArrayList<Candidates> candidateInfo = new ArrayList<Candidates>();
+		try {
+			String sql="delete from ehdokkaat where ehdokas_id=?";
+			getConnection();
+	         
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, ehdokas_id);
+	        statement.executeUpdate();
+
+			return candidateInfo;
+		}
+		
+		
+		catch(SQLException e) {
+			return null;
+		}
+	}
 	
 
 	public Candidates readCandidates(String ehdokas_id) {

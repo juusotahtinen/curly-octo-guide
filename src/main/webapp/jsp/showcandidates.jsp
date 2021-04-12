@@ -45,7 +45,7 @@
 					<td> 
 					<a href = "${pageContext.request.contextPath}/showcandiinfo1?ehdokas_id=${listCandidates.ehdokas_id}">Muokkaa</a>
 					| 
- 					<a href='/readtoupdate?ehdokas_id=${listCandidates.ehdokas_id}'>Poista</a> 
+ 					<a href = "${pageContext.request.contextPath}/deletecandiinfo1?ehdokas_id=${listCandidates.ehdokas_id}">Poista</a> 
 					</td>
 				</tr>
 			</c:forEach>
