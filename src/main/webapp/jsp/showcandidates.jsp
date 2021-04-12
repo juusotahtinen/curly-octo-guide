@@ -17,7 +17,7 @@
 	<center>
         <h1>Ehdokasluettelo</h1>
         <h2>
-            <a href="/addcandidates">Lisää uusi ehdokas</a>
+            <a href="/addcandidates">Lisää uusi ehdokas </a>
         </h2>
     </center>
 <div class = "container">
