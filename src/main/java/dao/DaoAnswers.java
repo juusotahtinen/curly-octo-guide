@@ -3,6 +3,7 @@ package dao;
 import java.sql.*;
 import java.util.ArrayList;
 
+import data.Candidates;
 import data.Kysymykset;
 import data.Vastaukset;
 
@@ -20,46 +21,43 @@ public class DaoAnswers {
 		
 	}
 	
-public ArrayList<Vastaukset> SelectEhdokkaat() {
-		
+
+
+
+	
+	public ArrayList<Vastaukset> SelectEhdokkaat() {
+
 		ArrayList<Vastaukset> list = new ArrayList<Vastaukset>();
-		 
+
 		try {
-			
+
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		 
-		    Connection conn = DriverManager.getConnection(dbURL, username, password);
 
-			
+			Connection conn = DriverManager.getConnection(dbURL, username, password);
+
 			String sql2 = "SELECT * FROM vastaukset";
-			 
+
 			Statement statement2 = conn.createStatement();
 			ResultSet result = statement2.executeQuery(sql2);
-			 
 
-			 
-			while (result.next()){
+			while (result.next()) {
 				Vastaukset v = new Vastaukset();
 				v.setKysymys_id(result.getInt("KYSYMYS_ID"));
 				v.setVastaaja_id(result.getInt("KYSYMYS_ID"));
 				v.setVastaus(result.getInt("vastaus"));
 				list.add(v);
 
-			    
 			}
 			return list;
-			
-			
-			
-		} catch (SQLException ex) {
-		    return null;
-		}
 
+		} catch (SQLException ex) {
+			return null;
+		}
 
 	}
 	

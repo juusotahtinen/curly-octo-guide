@@ -43,9 +43,6 @@ public class HelloAppEngine extends HttpServlet {
     HttpSession session = request.getSession();
     session.setAttribute("pituus", list.size());
     
-    ArrayList<Vastaukset> list1 = dao.SelectEhdokkaat();
-    
-    session.setAttribute("vastaukset", list1);
         
 
     
