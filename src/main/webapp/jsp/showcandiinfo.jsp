@@ -15,15 +15,13 @@
 </head>
 <body>
 	<center>
-        <h1>Ehdokasluettelo</h1>
-        <h2>
-            <a href="/addcandidates">Lisää uusi ehdokas</a>
-        </h2>
+        <h1>Ehdokkaan tiedot</h1>
+
     </center>
 <div class = "container">
 		
 	
-	<hr/>
+	
 		
 		
 		<table class = "table table-striped table-bordered">
@@ -32,24 +30,39 @@
 				<th>Sukunimi</th>
 				<th>Etunimi</th>
 				<th>Puolue</th>
-				<th>Toiminnot</th>
+				<th>Ikä</th>
+				<th>Ammatti</th>
+				<th>Kotipaikkakunta</th>
 			</tr>
 
-			<c:forEach var="listCandidates" items="${listCandidates}" >
+			<c:forEach var="ehdokas" items="${requestScope.ehdokas}" >
 				<tr>
-					<td>${listCandidates.sukunimi}</td>
-					<td>${listCandidates.etunimi}</td>
-					<td>${listCandidates.puolue}</td>
+					<td>${ehdokas.sukunimi}</td>
+					<td>${ehdokas.etunimi}</td>
+					<td>${ehdokas.puolue}</td>
+					<td>${ehdokas.ika}</td>
+					<td>${ehdokas.ammatti}</td>
+					<td>${ehdokas.kotipaikkakunta}</td>
 					<td> 
 
-					| 
-					<a href = "${pageContext.request.contextPath}/ShowCandidates?action=DELETE&id=${listCandidates.ehdokas_id}">Poista</a> 
 					</td>
 				</tr>
 			</c:forEach>
 		</table>
 		
 </div>
+<div class="myDiv">
+  <h2>Miksi minut pitäisi valita eduskuntaan</h2>
+  <c:forEach var="ehdokas" items="${requestScope.ehdokas}" >
+				<tr>
 
+					
+					<td>${ehdokas.miksi_eduskuntaan}</td>
+					<td> 
+
+					</td>
+				</tr>
+			</c:forEach>
+</div>
 </body>
 </html>
