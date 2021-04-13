@@ -51,7 +51,7 @@ public class Dao {
 	public ArrayList<Candidates> listAllCandidates() throws SQLException {
         ArrayList<Candidates> listCandidates = new ArrayList<>();
          
-        String sql = "SELECT * FROM ehdokkaat";
+        String sql = "SELECT * FROM ehdokkaat ORDER BY sukunimi";
          
         getConnection();
          

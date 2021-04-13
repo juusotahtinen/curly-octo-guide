@@ -30,7 +30,7 @@
 		<table class = "table table-striped table-bordered">
 			
 			<tr class = "thead-dark">
-				<th>ID</th>
+
 				<th>Sukunimi</th>
 				<th>Etunimi</th>
 				<th>Puolue</th>
@@ -39,7 +39,7 @@
 
 			<c:forEach var="listCandidates" items="${listCandidates}" >
 				<tr>
-					<td>${listCandidates.ehdokas_id}</td>
+
 					<td>${listCandidates.sukunimi}</td>
 					<td>${listCandidates.etunimi}</td>
 					<td>${listCandidates.puolue}</td>
