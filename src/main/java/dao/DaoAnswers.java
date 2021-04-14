@@ -25,7 +25,7 @@ public class DaoAnswers {
 
 
 	
-	public ArrayList<Vastaukset> SelectEhdokkaat() {
+	public ArrayList<Vastaukset> SelectEhdokkaanVastaukset() {
 
 		ArrayList<Vastaukset> list = new ArrayList<Vastaukset>();
 
@@ -48,7 +48,7 @@ public class DaoAnswers {
 			while (result.next()) {
 				Vastaukset v = new Vastaukset();
 				v.setKysymys_id(result.getInt("KYSYMYS_ID"));
-				v.setVastaaja_id(result.getInt("KYSYMYS_ID"));
+				v.setVastaaja_id(result.getInt("EHDOKAS_ID"));
 				v.setVastaus(result.getInt("vastaus"));
 				list.add(v);
 
@@ -59,6 +59,40 @@ public class DaoAnswers {
 			return null;
 		}
 
+	}
+	
+	public Candidates EhdokkaanTiedot(Integer ehdokas_id) throws SQLException {
+		
+		Candidates f =new Candidates();
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		Connection conn = DriverManager.getConnection(dbURL, username, password);
+
+		try {
+			
+			String sql="select ehdokas_id, etunimi, sukunimi, puolue from ehdokkaat where ehdokas_id=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, ehdokas_id);
+			ResultSet RS=pstmt.executeQuery();
+			while (RS.next()){
+				
+				f.setEhdokas_id(RS.getInt("ehdokas_id"));
+				f.setSukunimi(RS.getString("sukunimi"));
+				f.setEtunimi(RS.getString("etunimi"));
+				f.setPuolue(RS.getString("puolue"));
+				
+			}
+			return f;
+		}
+		catch(SQLException e) {
+			return null;
+		}
 	}
 	
 	public ArrayList<Kysymykset> Select() {
