@@ -1,9 +1,11 @@
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,15 +13,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.DaoAnswers;
+import data.Candidates;
 import data.Kysymykset;
 import data.Vastaukset;
 
 
 @WebServlet(
-    name = "HelloAppEngine",
-    urlPatterns = {"/hello"}
+    name = "NaytaSopivatEhdokkaat",
+    urlPatterns = {"/naytasopivatehdokkaat"}
 )
-public class HelloAppEngine extends HttpServlet {
+public class NaytaSopivatEhdokkaat extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private DaoAnswers dao = null; 
 	
@@ -32,20 +35,38 @@ public class HelloAppEngine extends HttpServlet {
     response.setCharacterEncoding("UTF-8");
 
     dao = new DaoAnswers("jdbc:mysql://localhost:3306/vaalikone", "pena", "kukkuu");
+	
+    HttpSession session=request.getSession(false);
+    ArrayList<Integer> top3_id = (ArrayList<Integer>) session.getAttribute("Ehdokas_id");
+    
+    
+    Candidates sopivaEhdokas = null;
+    ArrayList<Candidates> ehdokasOliot = new ArrayList<>();
+    
+    for(int i=0; i< top3_id.size(); i++) {
+    	int id = top3_id.get(i);
+    	
+    	try {
+			sopivaEhdokas = dao.EhdokkaanTiedot(id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	ehdokasOliot.add(sopivaEhdokas);
+    }
+    
+		
 
-    ArrayList<Kysymykset> list = dao.Select();
     
-    request.setAttribute("kysymykset", list);
+    request.setAttribute("ehdokasOliot", ehdokasOliot);
     
-    RequestDispatcher rd = request.getRequestDispatcher("jsp/GUI.jsp");
+    RequestDispatcher rd = request.getRequestDispatcher("jsp/showbestcandidates.jsp");
     rd.forward(request,  response);
     
-    HttpSession session = request.getSession();
-    session.setAttribute("pituus", list.size());
+
     
         
 
 
   }
 }
-
