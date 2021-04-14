@@ -43,7 +43,7 @@
 		
 		<div class="row justify-content-md-center">
 		<div class="col-md-2">
-  		<label> Täysin samaa mieltä</label>
+  		<label> Täysin eri mieltä</label>
   		</div>
   		<div class="col-md-2">
   		<label>En osaa sanoa</label>
