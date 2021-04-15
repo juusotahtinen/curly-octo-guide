@@ -1,9 +1,16 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
-  <head>
-    <meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
-    <title>Hello App Engine</title>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ page import="java.util.ArrayList" %>   
+<%@ page import="data.Candidates" %>   
     
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+    
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Vaalikone</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <style>
 	body{
 	height: 100%;
@@ -18,6 +25,7 @@
 	margin: auto;
 	background: transparent;
 	color: #000000;
+	padding: 70px;
 	}
 	
 	article{
@@ -27,9 +35,9 @@
 	color: #000000;
 	}
 	
-	footer{
+	footer.ins{
 	width: 100%;
-	position: fixed;
+	position: absolute;
   	left: 0;
   	bottom: 0;
 	background: transparent;
@@ -67,7 +75,7 @@
  	 font-size: 20px;
 	}
 	
-	.startbox{
+	.addbox{
 	margin: auto;
 	width: 70%;
 	background-color: rgb(255, 255, 255);
@@ -76,6 +84,7 @@
     box-shadow: rgb(0 0 0 / 19%) 0px 2px 4px 0px;
 	padding: 50px;
     text-align: center;
+    margin-bottom: 200px;
 	}
 	
 	.adminbox{
@@ -86,7 +95,7 @@
 	padding:10px;
 	background: rgba(124, 198, 198, 0.47);
 	}
-	
+
 	.center_div {
   	border: 1px solid gray;
   	margin-left: auto;
@@ -109,46 +118,52 @@
  	 display: inline-block;
  	 text-align: center;
 	}
+	
+	a.class1:link, a.class1:visited {
+ 	 background-color: transparent;
+ 	 color: black;
+  	padding: 14px 25px;
+  	text-align: center;
+  	text-decoration: none;
+ 	 display: inline-block;
+ 	 text-align: center;
+	}
 
 	a:hover, a:active {
-  	background-color: rgba(124, 198, 198, 0.47);
+  	background-color: rgba(124, 198, 198, 0.4);
+  	text-align: center;
+  	border-radius: 10px;
+    box-shadow: rgb(0 0 0 / 19%) 0px 2px 4px 0px;
+	}
+	
+	a.class1:hover, a.class1:active {
+  	background-color: rgba(255, 255, 255, 0.4);
   	text-align: center;
   	border-radius: 10px;
     box-shadow: rgb(0 0 0 / 19%) 0px 2px 4px 0px;
 	}
 
-
 </style>
-  </head>
+</head>
 <body>
 <header>
-	<img src="https://freepngimg.com/thumb/donald_trump/81871-box-area-brand-election-voting-ballot.png" width="300" height="300">
-</header> 
- 
+        <h1>Ehdokas poistettu</h1>
+</header>
 <article>
-  
-  <div class="startbox">
-	<table>
-      <tr>
-        <h1>Tervetuloa vaalikoneeseen!</h1>
-        <h2>______________________________</h2>
-        <br>
-      	<h3><a href='/hello'>Aloita sinulle parhaan ehdokkaan etsiminen tästä</a></h3>
-      	<br>
-      	<h2>______________________________</h2>
-      	<h2>Ylläpidon työkalut</h2>
-        <h2><a href='/showcandidates'>Listaa kaikki ehdokkaat</a></h2>
-        <h2><a href='/addcandidates'>Lisää ehdokas</a></h2>
-      </tr>
-    </table>
-  </div>
-</article>   
-    
+   <div class="startbox">
+        <h2>
+            <a href="/showcandidates">Näytä kaikki ehdokkaat</a>
+        </h2>
+        <h2>
+        	<a href="/addcandidates">Lisää uusi ehdokas</a>
+        </h2>
+        <br>    
+    </div>
+</article>    
 
-
-<footer>
+</body>
+<footer class="ins">
 	<h2>Vaalikone by TeamTeam3.0</h2>
-</footer> 
-      
-  </body>
+</footer>
+ 
 </html>

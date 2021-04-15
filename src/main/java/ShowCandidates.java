@@ -1,6 +1,6 @@
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -33,12 +33,17 @@ public class ShowCandidates extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        List<Candidates> listCandidates = null;
-		try {
-			listCandidates = dao.listAllCandidates();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+        ArrayList<Candidates> listCandidates = null;
+        if (dao.getConnection()) {
+        	try {
+				listCandidates=dao.listAllCandidates();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("No connection to database");
 		}
         request.setAttribute("listCandidates", listCandidates);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/showcandidates.jsp");

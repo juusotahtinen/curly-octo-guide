@@ -12,6 +12,7 @@ public class Candidates {
 	private String mita_asioita_haluat_edistaa;
 	private String ammatti;
 	
+	
 	public Candidates(String sukunimi, String etunimi, String puolue, String kotipaikkakunta, int ika, String miksi_eduskuntaan, String mita_asioita_haluat_edistaa, String ammatti) {
 
 		this.sukunimi=sukunimi;
@@ -23,7 +24,6 @@ public class Candidates {
 		this.mita_asioita_haluat_edistaa=mita_asioita_haluat_edistaa;
 		this.ammatti=ammatti;
 	}
-
 	public Candidates() {
 
 	}
