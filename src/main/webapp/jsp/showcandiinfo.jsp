@@ -9,44 +9,172 @@
 <html>
 <head>
 <style>
-h2 {
-  text-align: center;
-}
-p {
-  font-family: verdana;
-  font-size: 20px;
-}
+	body{
+	height: 100%;
+	background-image: linear-gradient(rgba(124, 198, 198, 0.9), rgba(124, 198, 198, 0.47), rgba(124, 198, 198, 0));
+	background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+	}
 
-.center_div {
-  border: 1px solid gray;
-  margin-left: auto;
-  margin-right: auto;
-  width: 90%;
-  background-color: #d0f0f6;
-  text-align: left;
-  padding-top: 50px;
-  padding-right: 30px;
-  padding-bottom: 50px;
-  padding-left: 80px;
-}
-h3{
- position: fixed;
- bottom: 0;
- width: 100%
- padding: 0px 10px 10px 0px;
-}
-a:link, a:visited {
-  background-color: #B0E0E6;
-  color: white;
-  padding: 14px 25px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-}
+	header{
+	width: 100%;
+	margin: auto;
+	background: transparent;
+	color: #000000;
+	padding: 70px;
+	}
+	
+	article{
+	width: 100%;
+	margin: auto;
+	background: transparent;
+	color: #000000;
+	}
+	
+	footer{
+	width: 100%;
+	position: static;
+  	left: 0;
+  	bottom: 0;
+	background: transparent;
+	color: #000000;
+	}
+	
+	img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+   
 
-a:hover, a:active {
-  background-color: #87CEEB;
-}
+	}
+	
+	h1 {
+	 font-family: Roboto, sans-serif;
+ 	 text-align: center;
+ 	 font-size: 30px;
+	}
+	
+	h2 {
+	 font-family: Roboto, sans-serif;
+ 	 text-align: center;
+ 	 font-size: 16px;
+	}
+	
+	h3{
+	 font-family: Roboto, sans-serif;
+ 	 text-align: center;
+ 	 font-size: 24px;
+	}
+	
+	h4 {
+	 font-family: Roboto, sans-serif;
+ 	 text-align: center;
+ 	 font-size: 16px;
+	}
+	
+	h2.info {
+	font-family: Roboto, sans-serif;
+ 	text-align: center;
+ 	font-size: 20px;
+ 	margin: auto;
+	width: 70%;
+	background-color: rgba(124, 198, 198, 0.4);
+    border-radius: 10px;
+    position: relative;
+    box-shadow: rgb(0 0 0 / 19%) 0px 2px 4px 0px;
+	padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 50px;
+	}
+	
+	p {
+  	font-family: verdana;
+ 	 font-size: 20px;
+	}
+	
+	.startbox{
+	margin: auto;
+	width: 70%;
+	background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    position: relative;
+    box-shadow: rgb(0 0 0 / 19%) 0px 2px 4px 0px;
+	padding: 50px;
+    text-align: center;
+    margin-bottom: 200px;
+	}
+	
+	.infobox{
+	margin: auto;
+	width: 90%;
+	background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    position: relative;
+    box-shadow: rgb(0 0 0 / 19%) 0px 2px 4px 0px;
+	padding: 50px;
+    text-align: center;
+    margin-bottom: 50px;
+	}
+	
+	.adminbox{
+	margin: auto;
+	width: 50%;
+    border: 3px solid black;
+	height:30%;
+	padding:10px;
+	background: rgba(124, 198, 198, 0.47);
+	}
+
+	.center_div {
+  	border: 1px solid gray;
+  	margin-left: auto;
+  	margin-right: auto;
+  	width: 90%;
+  	background-color: #d0f0f6;
+  	text-align: left;
+  	padding-top: 50px;
+  	padding-right: 30px;
+ 	 padding-bottom: 50px;
+ 	 padding-left: 80px;
+	}
+	
+	a:link, a:visited {
+ 	 background-color: transparent;
+ 	 color: black;
+  	padding: 14px 25px;
+  	text-align: center;
+  	text-decoration: none;
+ 	 display: inline-block;
+ 	 text-align: center;
+	}
+	
+	a.class1:link, a.class1:visited {
+ 	 background-color: transparent;
+ 	 color: black;
+  	padding: 14px 25px;
+  	text-align: center;
+  	text-decoration: none;
+ 	 display: inline-block;
+ 	 text-align: center;
+	}
+
+	a:hover, a:active {
+  	background-color: rgba(124, 198, 198, 0.4);
+  	text-align: center;
+  	border-radius: 10px;
+    box-shadow: rgb(0 0 0 / 19%) 0px 2px 4px 0px;
+	}
+	
+	a.class1:hover, a.class1:active {
+  	background-color: rgba(255, 255, 255, 0.4);
+  	text-align: center;
+  	border-radius: 10px;
+    box-shadow: rgb(0 0 0 / 19%) 0px 2px 4px 0px;
+	}
+
+</style>
 
 
 
@@ -61,11 +189,13 @@ a:hover, a:active {
 </head>
 <body>
 
-	<center>
+	<header>
         <h1>Ehdokkaan tiedot</h1>
 
-    </center>
-<div class = "container">
+    </header>
+<article>
+  
+  <div class="startbox">
 		
 	
 	
@@ -93,25 +223,24 @@ a:hover, a:active {
 				</tr>
 			</c:forEach>
 		</table>
-		
-</div>
-<div class="center_div">
-  <h2 style="border: 2px solid DodgerBlue;">Miksi minut pitäisi valita eduskuntaan</h2>
-  <c:forEach var="ehdokas" items="${requestScope.ehdokas}" >
+		<div class="infobox">
+  			<h2 class="info">Miksi minut pitäisi valita eduskuntaan</h2>
+  			<c:forEach var="ehdokas" items="${requestScope.ehdokas}" >
 				<tr>
-
-					
-					<p>- ${ehdokas.miksi_eduskuntaan}</p>
-<h2 style="border: 2px solid DodgerBlue;">Mitä asioita haluan edistää</h2>
-					<p>- ${ehdokas.mita_asioita_haluat_edistaa}</p>
-
-					</td>
-				</tr>
-				
+					<td>- ${ehdokas.miksi_eduskuntaan}</td>
+						<h2 class="info">Mitä asioita haluan edistää</h2>
+					<td>- ${ehdokas.mita_asioita_haluat_edistaa}</td>
+				</tr>	
 			</c:forEach>
-</div>
-<div id="header">
-<h3><a href = "${pageContext.request.contextPath}/showcandidates">Takaisin ehdokkaisiin</a></h3>
-</div>
+		</div>
+		<a href = "${pageContext.request.contextPath}/showcandidates">Takaisin ehdokkaisiin</a>
+	</div>
+</article>
+              
+          
+
 </body>
+<footer>
+	<h4>Vaalikone by TeamTeam3.0</h4>
+</footer>
 </html>
