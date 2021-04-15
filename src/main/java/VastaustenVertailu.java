@@ -136,6 +136,9 @@ public class VastaustenVertailu extends HttpServlet {
     Collections.sort(sopivuus);
     //response.getWriter().println(sopivuus);
     //response.getWriter().println(sopivuus2);
+    for (int i = 0; i < 3;i++) {
+    	
+    }
     int eka = sopivuus.get(0);
     int toka = sopivuus.get(1);
     int kolmas = sopivuus.get(2);
