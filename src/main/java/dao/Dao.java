@@ -103,7 +103,7 @@ public class Dao {
 		}
 
 	}	
-	public ArrayList<Candidates> updateCandis(String etunimi, String sukunimi, String puolue, int ehdokas_id) {
+	public ArrayList<Candidates> updateCandis(String sukunimi, String etunimi, String puolue, int ehdokas_id) {
 	try {
 		String sql="update ehdokkaat set sukunimi=?, etunimi=?, puolue=? where ehdokas_id=?";
 		PreparedStatement pstmt=conn.prepareStatement(sql);
@@ -119,7 +119,7 @@ public class Dao {
 	}
 }
 
-	}
+	
 	
 	public ArrayList<Candidates> deleteEhdokasInfo(String ehdokas_id) {
 		ArrayList<Candidates> candidateInfo = new ArrayList<Candidates>();
