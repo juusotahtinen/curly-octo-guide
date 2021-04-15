@@ -191,7 +191,6 @@
 
 	<header>
         <h1>Ehdokkaan tiedot</h1>
-
     </header>
 <article>
   
