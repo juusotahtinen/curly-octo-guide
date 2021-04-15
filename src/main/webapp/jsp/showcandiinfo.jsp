@@ -91,6 +91,7 @@ a:hover, a:active {
 					<td>${ehdokas.ammatti}</td>
 					<td>${ehdokas.kotipaikkakunta}</td>
 				</tr>
+				<h4><a href = "${pageContext.request.contextPath}/jsp/editcandidates.jsp?ehdokas_id=${ehdokas.ehdokas_id}">muokkaaa</a></h4>
 			</c:forEach>
 		</table>
 		
@@ -112,6 +113,7 @@ a:hover, a:active {
 </div>
 <div id="header">
 <h3><a href = "${pageContext.request.contextPath}/showcandidates">Takaisin ehdokkaisiin</a></h3>
+
 </div>
 </body>
 </html>

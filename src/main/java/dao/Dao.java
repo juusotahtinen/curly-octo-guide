@@ -103,7 +103,21 @@ public class Dao {
 			return null;
 		}
 	}	
-	
+	public ArrayList<Candidates> updateCandis(String etunimi, String sukunimi, String puolue, int ehdokas_id) {
+	try {
+		String sql="update ehdokkaat set sukunimi=?, etunimi=?, puolue=? where ehdokas_id=?";
+		PreparedStatement pstmt=conn.prepareStatement(sql);
+		pstmt.setString(1, sukunimi);
+		pstmt.setString(2, etunimi);
+		pstmt.setString(3, puolue);
+		pstmt.setInt(4, ehdokas_id);
+		pstmt.executeUpdate();
+		return listAllCandidates();
+	}
+	catch(SQLException e) {
+		return null;
+	}
+}
 
 	public Candidates readCandidates(String ehdokas_id) {
 		Candidates f=null;
