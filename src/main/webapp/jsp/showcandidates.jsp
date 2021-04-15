@@ -118,9 +118,26 @@
  	 display: inline-block;
  	 text-align: center;
 	}
+	
+	a.class1:link, a.class1:visited {
+ 	 background-color: transparent;
+ 	 color: black;
+  	padding: 14px 25px;
+  	text-align: center;
+  	text-decoration: none;
+ 	 display: inline-block;
+ 	 text-align: center;
+	}
 
 	a:hover, a:active {
-  	background-color: rgb(255, 255, 255, 0.3);
+  	background-color: rgba(124, 198, 198, 0.4);
+  	text-align: center;
+  	border-radius: 10px;
+    box-shadow: rgb(0 0 0 / 19%) 0px 2px 4px 0px;
+	}
+	
+	a.class1:hover, a.class1:active {
+  	background-color: rgba(255, 255, 255, 0.4);
   	text-align: center;
   	border-radius: 10px;
     box-shadow: rgb(0 0 0 / 19%) 0px 2px 4px 0px;
@@ -133,7 +150,10 @@
 	<header>
         <h1>Ehdokasluettelo</h1>
         <h2>
-            <a href="/addcandidates">Lisää uusi ehdokas </a>
+            <a href="index.html" class="class1">Palaa etusivulle</a>
+        </h2>
+        <h2>
+            <a href="/addcandidates" class="class1">Lisää uusi ehdokas</a>
         </h2>
     </header>
 <div class="startbox">
