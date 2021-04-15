@@ -221,6 +221,7 @@
 					<td>${ehdokas.ammatti}</td>
 					<td>${ehdokas.kotipaikkakunta}</td>
 				</tr>
+				<h4><a href = "${pageContext.request.contextPath}/jsp/editcandidates.jsp?ehdokas_id=${ehdokas.ehdokas_id}">muokkaaa</a></h4>
 			</c:forEach>
 		</table>
 		<div class="infobox">
@@ -232,12 +233,6 @@
 					<td>- ${ehdokas.mita_asioita_haluat_edistaa}</td>
 				</tr>	
 			</c:forEach>
-		</div>
-		<a href = "${pageContext.request.contextPath}/showcandidates">Takaisin ehdokkaisiin</a>
-	</div>
-</article>
-              
-          
 
 </body>
 <footer>
