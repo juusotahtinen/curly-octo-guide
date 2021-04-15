@@ -1,16 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<%@ page import="java.util.ArrayList" %>   
-<%@ page import="data.Candidates" %>   
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+ 
+ <%@ page import="java.util.ArrayList" %>  
+ <%@ page import="data.Kysymykset" %>
+ 
+   
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
     
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Vaalikone</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<meta charset="UTF-8">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 <style>
 	body{
 	height: 100%;
@@ -95,6 +97,18 @@
 	padding:10px;
 	background: rgba(124, 198, 198, 0.47);
 	}
+	
+	.questionbox{
+	margin: auto;
+	width: 70%;
+	background-color: rgba(124, 198, 198, 0.2);
+    border-radius: 10px;
+    position: relative;
+    box-shadow: rgb(0 0 0 / 19%) 0px 2px 4px 0px;
+	padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+	}
 
 	.center_div {
   	border: 1px solid gray;
@@ -144,53 +158,82 @@
 	}
 
 </style>
+  <HEAD>
+    <TITLE>Vaalikone</TITLE>
+  </HEAD>
 
-</head>
-<body>
-	<header>
-        <h1>Ehdokasluettelo</h1>
-        <h2>
-            <a href="index.html" class="class1">Palaa etusivulle</a>
-        </h2>
-        <h2>
-            <a href="/addcandidates" class="class1">Lisää uusi ehdokas</a>
-        </h2>
-    </header>
+  <BODY>
+  <header>
+  	<h1> VAALIKONE</h1>
+  	<h2>Vastaa seuraaviin kysymyksiin niin saat tietää itsellesi parhaiten sopivan ehdokkaan</h2>
+  </header>
+
+
+
+
 <div class="startbox">
+  <div class="col-sm-12">
+  	<form NAME="vastaukset" ACTION="/vastaustenVertailu" METHOD="POST">
+  		<fieldset>
+  		<% 
+		ArrayList<Kysymykset> kysymykset = (ArrayList<Kysymykset>)request.getAttribute("kysymykset");
 		
-	
-	<hr/>
+  		for ( int i=0;i < kysymykset.size();i++){
+  		
+  		Kysymykset k=kysymykset.get(i);
+  		%>
+  	<div class="questionbox">
+  		<h3><% out.println(k.getId()+"/"+kysymykset.size()); %></h3>
+  		<h4><% out.println(k.getKysymys());%></h4>
+	</div>	
+		<div class="row justify-content-md-center">
+		<div class="col-md-2">
+  		<label> Täysin eri mieltä</label>
+  		</div>
+  		<div class="col-md-2">
+  		<label>En osaa sanoa</label>
+  		</div>
+  		<div class="col-md-2">
+  		<label>Täysin samaa mieltä</label>
+  		</div>
+  		</div>
+  		<div class="row justify-content-md-center">
+		<div class="col-sm-1">
+  		<input class="form-check-input" type = "radio" name = "radios<%=i%>" value = "1">
+  		</div>
+  		<div class="col-sm-1">
+  		<input class="form-check-input" type = "radio" name = "radios<%=i%>" value = "2">
+  		</div>
+  		<div class="col-sm-1">
+  		<input class="form-check-input" type = "radio" name = "radios<%=i%>" value = "3">
+  		</div>
+  		<div class="col-sm-1">
+  		<input class="form-check-input" type = "radio" name = "radios<%=i%>" value = "4"> 
+  		</div>
+  		<div class="col-sm-1">
+  		<input class="form-check-input" type = "radio" name = "radios<%=i%>" value = "5"> 
+  		</div>
+
+  		<br>
+  		<br>
+
+
+		</div>
+  		<% 
+		 
 		
-		
-		<table class = "table table-striped table-bordered">
-			
-			<tr class = "thead-dark">
+  		}
 
-				<th>Sukunimi</th>
-				<th>Etunimi</th>
-				<th>Puolue</th>
-				<th>Toiminnot</th>
-			</tr>
+  		%>
+  		<br>
+  		<input type = "submit" value="Lähetä vastauksesi" >
+	</fieldset>	
+  	</form>
+	</div>
+	</div>
+  	</div>
+    
 
-			<c:forEach var="listCandidates" items="${listCandidates}" >
-				<tr>
 
-					<td>${listCandidates.sukunimi}</td>
-					<td>${listCandidates.etunimi}</td>
-					<td>${listCandidates.puolue}</td>
-					<td> 
-					<a href = "${pageContext.request.contextPath}/showcandiinfo1?ehdokas_id=${listCandidates.ehdokas_id}">Näytä tiedot</a>
-					| 
- 					<a href = "${pageContext.request.contextPath}/deletecandiinfo1?ehdokas_id=${listCandidates.ehdokas_id}">Poista</a> 
-					</td>
-				</tr>
-			</c:forEach>
-		</table>
-		
-</div>
-<footer>
-	<h2>Vaalikone by TeamTeam3.0</h2>
-</footer> 
-
-</body>
-</html>
+  </BODY>
+</HTML>
