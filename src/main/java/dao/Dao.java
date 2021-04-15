@@ -51,7 +51,7 @@ public class Dao {
 	public ArrayList<Candidates> listAllCandidates() throws SQLException {
         ArrayList<Candidates> listCandidates = new ArrayList<>();
          
-        String sql = "SELECT * FROM ehdokkaat ORDER BY sukunimi";
+        String sql = "SELECT * FROM ehdokkaat ORDER BY sukunimi, etunimi ASC";
          
         getConnection();
          
@@ -103,7 +103,7 @@ public class Dao {
 		}
 
 	}	
-	public ArrayList<Candidates> updateCandis(String etunimi, String sukunimi, String puolue, int ehdokas_id) {
+	public ArrayList<Candidates> updateCandis(String sukunimi, String etunimi, String puolue, int ehdokas_id) {
 	try {
 		String sql="update ehdokkaat set sukunimi=?, etunimi=?, puolue=? where ehdokas_id=?";
 		PreparedStatement pstmt=conn.prepareStatement(sql);
@@ -119,7 +119,7 @@ public class Dao {
 	}
 }
 
-	}
+	
 	
 	public ArrayList<Candidates> deleteEhdokasInfo(String ehdokas_id) {
 		ArrayList<Candidates> candidateInfo = new ArrayList<Candidates>();
@@ -165,6 +165,7 @@ public class Dao {
 		}
 	}
 	
+	
 	public ArrayList<Candidates> insert(Candidates f) {
 		try {
 			String sql="insert into ehdokkaat(sukunimi, etunimi, puolue, kotipaikkakunta, ika, miksi_eduskuntaan, mita_asioita_haluat_edistaa, ammatti)values(?, ?, ?, ?, ?, ?, ?, ?)";
@@ -187,6 +188,7 @@ public class Dao {
 			return null;
 		}
 	}
+	
 		
 	public ArrayList<Candidates> readCandidate(String ehdokas_id) {
 		ArrayList<Candidates> candidateInfo = new ArrayList<Candidates>();
