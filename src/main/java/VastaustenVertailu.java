@@ -13,6 +13,7 @@ import data.Candidates;
 import data.Vastaukset;
 
 
+
 @WebServlet(
 	name = "VastaustenVertailu", 
 	urlPatterns = { "/vastaustenVertailu"}
@@ -93,11 +94,7 @@ public class VastaustenVertailu extends HttpServlet {
 			}
 			
 
-  
-    
-
-    
-    	
+    // Here we make new list of the results
 	ArrayList<List> tulokset = new ArrayList<List>();
 	   
     
@@ -114,8 +111,9 @@ public class VastaustenVertailu extends HttpServlet {
     	tulokset.add(tulos);
     }
     
-
+    //Then we make list how suitableness
     ArrayList<Integer> sopivuus = new ArrayList<Integer>();
+    //...and same list but for sorting them in ascending order
     ArrayList<Integer> sopivuus2 = new ArrayList<Integer>();
     
     int sum=0;
@@ -131,6 +129,8 @@ public class VastaustenVertailu extends HttpServlet {
     	sopivuus2.add(sum);
     	
     }
+    
+    //Then we sort the list
     
     //response.getWriter().println(sopivuus);
     Collections.sort(sopivuus);
@@ -148,6 +148,7 @@ public class VastaustenVertailu extends HttpServlet {
     int kolmasIndex =sopivuus2.indexOf(kolmas);
 //    response.getWriter().println("Pienimmän luvun indeksi: "+ minIndex);
     
+    //Here we get the three most suitable candidates IDs
     ArrayList<Integer> paras_id = new ArrayList<Integer>();
     paras_id.add(ekaIndex);
     paras_id.add(tokaIndex);
