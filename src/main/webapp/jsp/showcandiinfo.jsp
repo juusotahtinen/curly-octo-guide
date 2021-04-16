@@ -8,6 +8,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Vaalikone</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/style.css">
 <style>
 	.info {
 	font-family: Roboto, sans-serif;
@@ -31,11 +35,6 @@
     margin-bottom: 20px;
 	}
 </style>
-
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Vaalikone</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -78,16 +77,14 @@
 		<div class="infobox">
 		   <div class="info">
   				<h2>Miksi minut pitäisi valita eduskuntaan</h2>
-  			<c:forEach var="ehdokas" items="${requestScope.ehdokas}" >
-			
+  					<c:forEach var="ehdokas" items="${requestScope.ehdokas}" >
 					<td>- ${ehdokas.miksi_eduskuntaan}</td>
 			</div>
-					<div class="info">
+			<div class="info">
 						<h2>Mitä asioita haluan edistää</h2>
 					<td>- ${ehdokas.mita_asioita_haluat_edistaa}</td>
-				</tr>
 			</div>	
-			</c:forEach>
+		  </c:forEach>
 		</div>
 </div>
 </body>
