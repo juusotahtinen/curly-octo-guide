@@ -15,7 +15,9 @@ import data.Candidates;
 
 
 
-
+/**
+ * Servlet implementation class DeleteCandiInfo
+ */
 @WebServlet("/deletecandiinfo1")
 public class DeleteCandiInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;

@@ -12,7 +12,9 @@ import data.Candidates;
 
 
 
-
+/**
+ * Servlet implementation class AddCandidates
+ */
 @WebServlet("/addcandidates")
 public class AddCandidates extends HttpServlet {
 	private static final long serialVersionUID = 1L;
