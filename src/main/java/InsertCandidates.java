@@ -15,6 +15,7 @@ import data.Candidates;
 
 
 /**
+ * @author juuso
  * Servlet implementation class InsertCandidates
  */
 @WebServlet("/inserted")
@@ -22,6 +23,9 @@ public class InsertCandidates extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Dao dao=null;
 	
+	/**
+	 * Otetaan yhteys tietokantaan
+	 */
 	@Override
 	public void init() {
 		dao=new Dao("jdbc:mysql://localhost:3306/vaalikone", "pena", "kukkuu");
@@ -32,6 +36,10 @@ public class InsertCandidates extends HttpServlet {
 	     throws IOException {
 
 	}
+	
+	/**
+	 * Otetaan listCandidates vastaan Dao.javasta ja lähetetään uuden ehdokkaan tiedot tietokantaan
+	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response) 
 	     throws IOException, ServletException {
 		
