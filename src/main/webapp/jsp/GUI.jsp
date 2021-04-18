@@ -1,3 +1,11 @@
+<!-- 
+Author Leevi Palo
+
+Tassa JSP ohjelmassa luodaan graafinen nakyma vaalikoneen kysymyksiin vastaamista varten
+
+ -->
+
+<!-- Alussa tarpeelliset asiat skandi merkkeja ja sivun muotoa varten -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  
@@ -48,6 +56,7 @@
   <div class="col-sm-12">
   	<form NAME="vastaukset" ACTION="/vastaustenVertailu" METHOD="POST">
   		<fieldset>
+  		<!-- For Looppi jolla saadaan loopattua jokainen kysymys niin etta saadaan kysymys ja viisi radio painiketta vastaamiseen -->
   		<% 
 		ArrayList<Kysymykset> kysymykset = (ArrayList<Kysymykset>)request.getAttribute("kysymykset");
 		

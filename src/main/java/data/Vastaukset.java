@@ -2,7 +2,18 @@ package data;
 
 import java.util.ArrayList;
 
+/**
+ * 
+ * @author Leevi Palo
+ * Data luokka ehdokkaiden vastausten lukua tietokannasta varten
+ *
+ */
+
 public class Vastaukset {
+	
+	/**
+	 * Alustetaan muuttujat vastaajan id, ehdokkaan vastaus ja kysymyksen id
+	 */
 	private int vastaaja_id;
 	private int vastaus;
 	private int kysymys_id;
