@@ -15,12 +15,19 @@ import data.Candidates;
 
 
 
-
+/**
+ * @author riku
+ * Servlet implementation class ShowCandiInfo1
+ */
 
 @WebServlet("/showcandiinfo1")
 public class ShowCandiInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Dao dao=null;
+	
+	/**
+	 * Otetaan yhteys tietokantaan
+	 */
 	
 	@Override
 	public void init() {
@@ -32,6 +39,10 @@ public class ShowCandiInfo extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
  
+	/**
+	 * Otetaan getEhdokasInfo vastaan Dao.javasta ja n‰ytet‰‰n ehdokkaan tiedot ehdokas_id:n mukaan
+	 */
+	
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
@@ -42,8 +53,7 @@ public class ShowCandiInfo extends HttpServlet {
 			p=dao.getEhdokasInfo(ehdokas_id);
         }
         
-//        response.getWriter().println(ehdokas_id);
-//        response.getWriter().println(p);
+
 
         request.setAttribute("ehdokas", p);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/jsp/showcandiinfo.jsp");
