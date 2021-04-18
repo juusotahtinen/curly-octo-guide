@@ -36,6 +36,9 @@
   <header>
   	<h1> VAALIKONE</h1>
   	<h2>Vastaa seuraaviin kysymyksiin niin saat tietää itsellesi parhaiten sopivan ehdokkaan</h2>
+  	<h2>
+            <a href="index.html" class="class1">Palaa etusivulle</a>
+        </h2>
   </header>
 
 
