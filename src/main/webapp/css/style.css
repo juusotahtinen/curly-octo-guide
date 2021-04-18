@@ -1,56 +1,195 @@
+body{
+	height: 100%;
+	background-image: linear-gradient(rgba(124, 198, 198, 0.9), rgba(124, 198, 198, 0.47), rgba(124, 198, 198, 0));
+	background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+	}
 
-h4{
-width: 300px;
-padding: 25px;
-margin: auto;
-
-background: rgba(124, 198, 198, 0.47);
-
-
-
-color: #000000;
-}
-
-h2{
-	width: 600px;
-	padding: 25px;
+	header{
+	width: 100%;
 	margin: auto;
-	font-size: 18px;
-	text-align:center;
-}
-.col-sm-12{
-	padding: 20px;
-}
-
-.container{
-	padding: 20px;
-}
-
-.group{
-	display: inline-block;
-}
-
-fieldset{
-	text-align:center;
-}
-
-.col-md-2{
-	padding:20px;
-}
-
-h3{
-	width: 100px;
-	padding: 5px;
+	background: transparent;
+	color: #000000;
+	padding: 70px;
+	}
+	
+	article{
+	width: 100%;
 	margin: auto;
-	background: #7CC6C6;
-	border:10px solid white;
+	background: transparent;
+	color: #000000;
+	}
 	
-}
-
-label{
+	footer{
+	width: 100%;
+	position: static;
+  	left: 0;
+  	bottom: 0;
+	background: transparent;
+	color: #000000;
+	}
 	
-	font-size:18px;
+	img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+   
 
-}
+	}
+	
+	h1 {
+	 font-family: Roboto, sans-serif;
+ 	 text-align: center;
+ 	 font-size: 30px;
+	}
+	
+	h2 {
+	 font-family: Roboto, sans-serif;
+ 	 text-align: center;
+ 	 font-size: 16px;
+	}
+	
+	h2.info {
+	font-family: Roboto, sans-serif;
+ 	text-align: center;
+ 	font-size: 20px;
+ 	margin: auto;
+	width: 70%;
+	background-color: rgba(124, 198, 198, 0.4);
+    border-radius: 10px;
+    position: relative;
+    box-shadow: rgb(0 0 0 / 19%) 0px 2px 4px 0px;
+	padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 50px;
+	}
+	
+	
+	
+	h3{
+	 font-family: Roboto, sans-serif;
+ 	 text-align: center;
+ 	 font-size: 24px;
+	}
+	
+	h4 {
+	 font-family: Roboto, sans-serif;
+ 	 text-align: center;
+ 	 font-size: 16px;
+	}
+	
+	
+	p {
+  	font-family: verdana;
+ 	 font-size: 20px;
+	}
+	
+	.addbox{
+	margin: auto;
+	width: 70%;
+	background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    position: relative;
+    box-shadow: rgb(0 0 0 / 19%) 0px 2px 4px 0px;
+	padding: 50px;
+    text-align: center;
+    margin-bottom: 200px;
+	}
+	
+	.startbox{
+	margin: auto;
+	width: 90%;
+	background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    position: relative;
+    box-shadow: rgb(0 0 0 / 19%) 0px 2px 4px 0px;
+	padding: 50px;
+    text-align: center;
+    margin-bottom: 200px;
+	}
+	
+	.adminbox{
+	margin: auto;
+	width: 50%;
+    border: 3px solid black;
+	height:30%;
+	padding:10px;
+	background: rgba(124, 198, 198, 0.47);
+	}
+	
+	.infobox{
+	margin: auto;
+	width: 90%;
+	background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    position: relative;
+    box-shadow: rgb(0 0 0 / 19%) 0px 2px 4px 0px;
+	padding: 50px;
+    text-align: center;
+    margin-bottom: 50px;
+	}
+	
+	
+	
+
+	.center_div {
+  	border: 1px solid gray;
+  	margin-left: auto;
+  	margin-right: auto;
+  	width: 90%;
+  	background-color: #d0f0f6;
+  	text-align: left;
+  	padding-top: 50px;
+  	padding-right: 30px;
+ 	 padding-bottom: 50px;
+ 	 padding-left: 80px;
+	}
+	
+	a:link, a:visited {
+ 	 background-color: transparent;
+ 	 color: black;
+  	padding: 14px 25px;
+  	text-align: center;
+  	text-decoration: none;
+ 	 display: inline-block;
+ 	 text-align: center;
+	}
+	
+	a.class1:link, a.class1:visited {
+ 	 background-color: transparent;
+ 	 color: black;
+  	padding: 14px 25px;
+  	text-align: center;
+  	text-decoration: none;
+ 	 display: inline-block;
+ 	 text-align: center;
+	}
+
+	a:hover, a:active {
+  	background-color: rgba(124, 198, 198, 0.4);
+  	text-align: center;
+  	border-radius: 10px;
+    box-shadow: rgb(0 0 0 / 19%) 0px 2px 4px 0px;
+	}
+	
+	a.class1:hover, a.class1:active {
+  	background-color: rgba(255, 255, 255, 0.4);
+  	text-align: center;
+  	border-radius: 10px;
+    box-shadow: rgb(0 0 0 / 19%) 0px 2px 4px 0px;
+	}
+	
+	footer.ins{
+	width: 100%;
+	position: absolute;
+  	left: 0;
+  	bottom: 0;
+	background: transparent;
+	color: #000000;
+	}
+	
+	
 
 

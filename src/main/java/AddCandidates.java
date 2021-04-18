@@ -12,12 +12,18 @@ import data.Candidates;
 
 
 
-
+/**
+ * @author juuso
+ * Servlet implementation class AddCandidates
+ */
 @WebServlet("/addcandidates")
 public class AddCandidates extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Dao dao=null;
 	
+	/**
+	 * Otetaan yhteys tietokantaan
+	 */
 	@Override
 	public void init() {
 		dao=new Dao("jdbc:mysql://localhost:3306/vaalikone", "pena", "kukkuu");
@@ -28,6 +34,9 @@ public class AddCandidates extends HttpServlet {
         doGet(request, response);
     }
  
+	/**
+	 * Otetaan readCandidates vastaan Dao.javasta ja valmistellaan tietokanta uuden ehdokkaan lisäämistä varten.
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String ehdokas_id=request.getParameter("ehdokas_id");
