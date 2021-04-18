@@ -81,19 +81,19 @@ Tassa JSP ohjelmassa luodaan graafinen nakyma vaalikoneen kysymyksiin vastaamist
   		</div>
   		<div class="row justify-content-md-center">
 		<div class="col-sm-1">
-  		<input class="form-check-input" type = "radio" name = "radios<%=i%>" value = "1">
+  		<input  type = "radio" name = "radios<%=i%>" value = "1">
   		</div>
   		<div class="col-sm-1">
-  		<input class="form-check-input" type = "radio" name = "radios<%=i%>" value = "2">
+  		<input type = "radio" name = "radios<%=i%>" value = "2">
   		</div>
   		<div class="col-sm-1">
-  		<input class="form-check-input" type = "radio" name = "radios<%=i%>" value = "3">
+  		<input type = "radio" name = "radios<%=i%>" value = "3">
   		</div>
   		<div class="col-sm-1">
-  		<input class="form-check-input" type = "radio" name = "radios<%=i%>" value = "4"> 
+  		<input type = "radio" name = "radios<%=i%>" value = "4"> 
   		</div>
   		<div class="col-sm-1">
-  		<input class="form-check-input" type = "radio" name = "radios<%=i%>" value = "5"> 
+  		<input type = "radio" name = "radios<%=i%>" value = "5"> 
   		</div>
 
   		<br>
@@ -113,7 +113,7 @@ Tassa JSP ohjelmassa luodaan graafinen nakyma vaalikoneen kysymyksiin vastaamist
   	</form>
 	</div>
 	</div>
-  	</div>
+
     
 
 
