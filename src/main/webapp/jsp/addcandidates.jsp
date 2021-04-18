@@ -11,26 +11,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Vaalikone</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/style.css">
+
 
 </head>
 <body>
-	<center>
-        <h1>Lisää ehdokas</h1>
+<header>
+      <h1>Syötä ehdokkaan tiedot</h1>
         <h2>
-            <a href="/showcandidates">Näytä kaikki ehdokkaat</a>
+            <a href='/showcandidates' class="class1">Listaa kaikki ehdokkaat</a>
         </h2>
-    </center>
+</header>
 
-<div>
+<div class="addbox">
 
   <div class="container">
     <div class="row">
      
       <div class="col-lg-12" align="center">
         <div class="card shadow-sm">
-          <div class="card-header bg-transparent border-0">
-            <h3 class="mb-0"><i class="far fa-clone pr-1"></i>Syötä ehdokkaan tiedot</h3>
-          </div>
+          
+     
           <div class="card-body pt-0"><form action='/inserted' method='post'>
             <table class="table table-bordered">
               <tr align="center">
@@ -125,7 +126,7 @@
 
 
                 <td align="center">
-				<input type='submit' name='ok' value='Send'> 
+				<input type='submit' name='ok' value='Lisää ehdokas'> 
 			</tr>
            </table>
           </div>
@@ -137,7 +138,9 @@
     </div>
     </div>
     </div>
-              
+<footer>
+	<h2>Vaalikone by TeamTeam3.0</h2>
+</footer>              
               
    
 </body>

@@ -1,3 +1,11 @@
+<!-- 
+Author Leevi Palo
+
+Tassa JSP ohjelmassa luodaan graafinen nakyma vaalikoneen kysymyksiin vastaamista varten
+
+ -->
+
+<!-- Alussa tarpeelliset asiat skandi merkkeja ja sivun muotoa varten -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  
@@ -11,26 +19,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="/css/style.css">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Vaalikone</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="/css/style.css">
+<style>
+	.questionbox{
+	margin: auto;
+	width: 70%;
+	background-color: rgba(124, 198, 198, 0.2);
+    border-radius: 10px;
+    position: relative;
+    box-shadow: rgb(0 0 0 / 19%) 0px 2px 4px 0px;
+	padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+	}
+</style>
   <HEAD>
     <TITLE>Vaalikone</TITLE>
   </HEAD>
 
   <BODY>
-  <div class="container">
-
-  	<center><h1> VAALIKONE</h1></center>
+  <header>
+  	<h1> VAALIKONE</h1>
   	<h2>Vastaa seuraaviin kysymyksiin niin saat tietää itsellesi parhaiten sopivan ehdokkaan</h2>
+  	<h2>
+            <a href="index.html" class="class1">Palaa etusivulle</a>
+        </h2>
+  </header>
 
 
 
 
-<div class="row">
+<div class="startbox">
   <div class="col-sm-12">
   	<form NAME="vastaukset" ACTION="/vastaustenVertailu" METHOD="POST">
   		<fieldset>
+  		<!-- For Looppi jolla saadaan loopattua jokainen kysymys niin etta saadaan kysymys ja viisi radio painiketta vastaamiseen -->
   		<% 
 		ArrayList<Kysymykset> kysymykset = (ArrayList<Kysymykset>)request.getAttribute("kysymykset");
 		
@@ -38,9 +64,10 @@
   		
   		Kysymykset k=kysymykset.get(i);
   		%>
+  	<div class="questionbox">
   		<h3><% out.println(k.getId()+"/"+kysymykset.size()); %></h3>
   		<h4><% out.println(k.getKysymys());%></h4>
-		
+	</div>	
 		<div class="row justify-content-md-center">
 		<div class="col-md-2">
   		<label> Täysin eri mieltä</label>
@@ -91,4 +118,8 @@
 
 
   </BODY>
+<footer>
+	<h2>Vaalikone by TeamTeam3.0</h2>
+</footer> 
+
 </HTML>

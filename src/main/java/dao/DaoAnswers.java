@@ -7,12 +7,29 @@ import data.Candidates;
 import data.Kysymykset;
 import data.Vastaukset;
 
+/**
+ * 
+ * @author Leevi Palo
+ * @author Juho Hamalainen
+ *
+ */
 
 public class DaoAnswers {
 
+	/**
+	 * Alustetaan tarvittavat muuttujat: tietokannan osoite, kayttajatunnus ja salasana
+	 */
+	
 	private String dbURL;
 	private String username;
 	private String password;
+	
+	/**
+	 * Muodostin oliolle
+	 * @param dbURL tietokannan osoite
+	 * @param username tietokannan kayttajatunnus
+	 * @param password tietokannan salasana
+	 */
 	
 	public DaoAnswers(String dbURL, String username, String password) {
 		this.dbURL = dbURL;
@@ -24,6 +41,10 @@ public class DaoAnswers {
 
 
 
+	/**
+	 * Juhon koodia
+	 * @return
+	 */
 	
 	public ArrayList<Vastaukset> SelectEhdokkaanVastaukset() {
 
@@ -61,6 +82,13 @@ public class DaoAnswers {
 
 	}
 	
+	/**
+	 * Juhon koodia
+	 * @param ehdokas_id
+	 * @return
+	 * @throws SQLException
+	 */
+	
 	public Candidates EhdokkaanTiedot(Integer ehdokas_id) throws SQLException {
 		
 		Candidates f =new Candidates();
@@ -95,9 +123,24 @@ public class DaoAnswers {
 		}
 	}
 	
+	/**
+	 * Leevin koodia
+	 * Haetaan tietokannasta kysymykset ja niiden id ja lisataan ArrayListiin jonka tyyppi on Kysymykset
+	 * @return palautetaan ArrayList joka sisaltaa kysymykset ja niiden id:n
+	 */
+	 
+	
 	public ArrayList<Kysymykset> Select() {
 		
+		/**
+		 * Luodaan ArrayList joka palautetaan
+		 */
+		
 		ArrayList<Kysymykset> list = new ArrayList<Kysymykset>();
+		
+		/**
+		 * Try Catch rakenne tietokannan yhteyden luomiseen ja kayttoon
+		 */
 		 
 		try {
 			
@@ -108,20 +151,39 @@ public class DaoAnswers {
 				e.printStackTrace();
 			}
 		 
+			/**
+			 * Yhteyden luonti
+			 */
+			
 		    Connection conn = DriverManager.getConnection(dbURL, username, password);
-
+		    
+		    /**
+		     * SQL lause ja sen suoritus
+		     */
 			
 			String sql2 = "SELECT * FROM kysymykset";
 			 
 			Statement statement2 = conn.createStatement();
 			ResultSet result = statement2.executeQuery(sql2);
 			 
-
+			/**
+			 * While loop jossa tallennetaan ArrayListiin halutut tiedot
+			 */
 			 
 			while (result.next()){
+				
+				/**
+				 * Luodaan Kysymykset tyyppinen olio johon tallennetaan ylla mainitut arvot
+				 */
+				
 				Kysymykset k = new Kysymykset();
 				k.setId(result.getInt("KYSYMYS_ID"));
 				k.setKysymys(result.getString("KYSYMYS"));
+				
+				/**
+				 * Lisataan olio listaan
+				 */
+				
 				list.add(k);
 
 			    

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 import data.Candidates;
 
-
 import java.sql.Connection;
 
 
@@ -26,6 +25,10 @@ public class Dao {
 		this.pass=pass;
 	}
 	
+	/**
+	 * Luodaan yhteys tietokantaan
+	 * @return true
+	 */
 	public boolean getConnection() {
 		try {
 	        if (conn == null || conn.isClosed()) {
@@ -44,15 +47,26 @@ public class Dao {
 		}
 	}
 	
+	/**
+	 * Katkaistaan yhteys tietokantaan
+	 * 
+	 */
 	protected void disconnect() throws SQLException {
         if (conn != null && !conn.isClosed()) {
             conn.close();
         }
     }
+	
+	/**
+	 * @author juuso
+	 * Suoritetaan sql-lause jolla listataan kaikkien ehdokkaiden kaikki tiedot
+	 * @return listCandidates
+	 * @throws SQLException
+	 */
 	public ArrayList<Candidates> listAllCandidates() throws SQLException {
         ArrayList<Candidates> listCandidates = new ArrayList<>();
          
-        String sql = "SELECT * FROM ehdokkaat";
+        String sql = "SELECT * FROM ehdokkaat ORDER BY sukunimi, etunimi ASC";
          
         getConnection();
          
@@ -102,9 +116,56 @@ public class Dao {
 		catch(SQLException e) {
 			return null;
 		}
+
 	}	
+	public ArrayList<Candidates> updateCandis(String sukunimi, String etunimi, String puolue, int ehdokas_id) {
+	try {
+		String sql="update ehdokkaat set sukunimi=?, etunimi=?, puolue=? where ehdokas_id=?";
+		PreparedStatement pstmt=conn.prepareStatement(sql);
+		pstmt.setString(1, sukunimi);
+		pstmt.setString(2, etunimi);
+		pstmt.setString(3, puolue);
+		pstmt.setInt(4, ehdokas_id);
+		pstmt.executeUpdate();
+		return listAllCandidates();
+	}
+	catch(SQLException e) {
+		return null;
+	}
+}
+
+	
+	/**
+	 * @author juuso
+	 * Suoritetaan sql-lause jolla poistetaan ehdokas_id:n mukaisen ehdokkaan tiedot tietokannasta
+	 * @param ehdokas_id
+	 * @return candidateInfo
+	 */
+	public ArrayList<Candidates> deleteEhdokasInfo(String ehdokas_id) {
+		ArrayList<Candidates> candidateInfo = new ArrayList<Candidates>();
+		try {
+			String sql="delete from ehdokkaat where ehdokas_id=?";
+			getConnection();
+	         
+			PreparedStatement statement = conn.prepareStatement(sql);
+			statement.setString(1, ehdokas_id);
+	        statement.executeUpdate();
+
+			return candidateInfo;
+		}
+		
+		
+		catch(SQLException e) {
+			return null;
+		}
+	}
 	
 
+	/**
+	 * Suoritetaan sql-lause jolla luetaan ehdokas_id:n mukaisen ehdokkaan tiedot tietokannasta
+	 * @param ehdokas_id
+	 * @return f
+	 */
 	public Candidates readCandidates(String ehdokas_id) {
 		Candidates f=null;
 		try {
@@ -128,6 +189,12 @@ public class Dao {
 		}
 	}
 	
+	/**
+	 * @author juuso
+	 * Suoritetaan sql-lause jolla lähetetään uuden ehdokkaan tiedot tietokantaan
+	 * @param f
+	 * @return listAllCandidates
+	 */
 	public ArrayList<Candidates> insert(Candidates f) {
 		try {
 			String sql="insert into ehdokkaat(sukunimi, etunimi, puolue, kotipaikkakunta, ika, miksi_eduskuntaan, mita_asioita_haluat_edistaa, ammatti)values(?, ?, ?, ?, ?, ?, ?, ?)";
@@ -150,27 +217,32 @@ public class Dao {
 			return null;
 		}
 	}
+	
 		
-	public ArrayList<Candidates> updateCandidates() throws SQLException {
-        ArrayList<Candidates> showToUpdate = new ArrayList<>();
-         
-        String sql = "SELECT * FROM ehdokkaat WHERE ehdokas_id=?";
-         
-        getConnection();
-         
-        Statement statement = conn.createStatement();
-        ResultSet resultSet = statement.executeQuery(sql);
-         
-        while (resultSet.next()) {
-        	Candidates r=new Candidates();
-			r.setEhdokas_id(resultSet.getInt("ehdokas_id"));
-			r.setSukunimi(resultSet.getString("sukunimi"));
-			r.setEtunimi(resultSet.getString("etunimi"));
-			r.setPuolue(resultSet.getString("puolue"));
-			showToUpdate.add(r);
-        }  
-
-        return showToUpdate;
+	public ArrayList<Candidates> readCandidate(String ehdokas_id) {
+		ArrayList<Candidates> candidateInfo = new ArrayList<Candidates>();
+		
+		try {
+			String sql="select * from ehdokkaat where id=?";
+			getConnection();
+			
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, ehdokas_id);
+			ResultSet RS=pstmt.executeQuery();
+			
+			while (RS.next()){
+				Candidates r=new Candidates();
+				r.setEhdokas_id(RS.getInt("ehdokas_id"));
+				r.setSukunimi(RS.getString("sukunimi"));
+				r.setEtunimi(RS.getString("etunimi"));
+				r.setPuolue(RS.getString("puolue"));
+				candidateInfo.add(r);
+			}
+			return candidateInfo;
+		}
+		catch(SQLException e) {
+			return null;
+		}
 	}
 }
 	

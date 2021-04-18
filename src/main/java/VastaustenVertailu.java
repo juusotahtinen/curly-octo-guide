@@ -12,6 +12,12 @@ import dao.DaoAnswers;
 import data.Candidates;
 import data.Vastaukset;
 
+/**
+ * 
+ * @author Leevi Palo
+ * @author Juho Hamalainen
+ *
+ */
 
 
 @WebServlet(
@@ -21,6 +27,11 @@ import data.Vastaukset;
 
 public class VastaustenVertailu extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+    /**
+     * Luodaan yhteys tietokantaan kayttamalla DaoAnswers nimistä DAO ohjelmaa Data-paketista
+     */
+	
 	private DaoAnswers dao = null; 
 
 
@@ -32,14 +43,35 @@ public class VastaustenVertailu extends HttpServlet {
 	response.setCharacterEncoding("UTF-8");
 	
 	
-	// First we get the answers submitted by the user and insert them into a ArrayList
+	/**
+	 * Kayttajien vastausten tallennuksen ArrayListiin on kirjoittanut Leevi
+	 * Loput on Juhon
+	 */
+	
+	/**
+	 * Luodaan Integer tyyppinen ArrayList johon tallennetaan kayttajan antamat vastukset
+	 */
+	
 	ArrayList<Integer> kayttajanVastaukset = new ArrayList<>();
+	
+	/**
+	 * Vastaanotetaan sessioon tallennettu listan koko
+	 */
 	
 	HttpSession session=request.getSession(false);
 	int size = (int) session.getAttribute("pituus");
 	int vastaus = 0;
 	
+	/**
+	 * Luodaan for loop jolla saadaan kayttajan vastaukset tallenettua ArrayListiin
+	 */
+	
 	for (int i=0;i<size;i++) {
+		
+		/**
+		 * Looppi pyorii kysymysten maaran verran ja vastaanottaa GUI.jsp:lta kayttajan vastaukset 
+		 * Sen jalkeen ne lisataan ArrayListiin
+		 */
 		
 		String param = "radios" + i;
 		String vastausString = request.getParameter(param);
@@ -58,7 +90,10 @@ public class VastaustenVertailu extends HttpServlet {
 
 	}
 	
-
+	/**
+	 * Tasta alkaa Juhon koodi
+	 */
+	
 	// Then we compare user answers with the candidates answers
 	
 	// First we connect to database via daoAnswers.java and execute method SelectEhdokkaat from daoAnswers.java
@@ -136,6 +171,9 @@ public class VastaustenVertailu extends HttpServlet {
     Collections.sort(sopivuus);
     //response.getWriter().println(sopivuus);
     //response.getWriter().println(sopivuus2);
+    for (int i = 0; i < 3;i++) {
+    	
+    }
     int eka = sopivuus.get(0);
     int toka = sopivuus.get(1);
     int kolmas = sopivuus.get(2);

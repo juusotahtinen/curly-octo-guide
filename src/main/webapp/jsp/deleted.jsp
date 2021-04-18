@@ -12,11 +12,10 @@
 <title>Vaalikone</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/style.css">
-
 </head>
 <body>
 <header>
-        <h1>Ehdokas lisätty</h1>
+        <h1>Ehdokas poistettu</h1>
 </header>
 <article>
    <div class="startbox">
