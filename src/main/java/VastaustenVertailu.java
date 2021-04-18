@@ -12,6 +12,13 @@ import dao.DaoAnswers;
 import data.Candidates;
 import data.Vastaukset;
 
+/**
+ * 
+ * @author Leevi Palo
+ * @author Juho Hamalainen
+ *
+ */
+
 
 @WebServlet(
 	name = "VastaustenVertailu", 
@@ -20,6 +27,11 @@ import data.Vastaukset;
 
 public class VastaustenVertailu extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+    /**
+     * Luodaan yhteys tietokantaan kayttamalla DaoAnswers nimist‰ DAO ohjelmaa Data-paketista
+     */
+	
 	private DaoAnswers dao = null; 
 
 
@@ -31,14 +43,35 @@ public class VastaustenVertailu extends HttpServlet {
 	response.setCharacterEncoding("UTF-8");
 	
 	
-	// First we get the answers submitted by the user and insert them into a ArrayList
+	/**
+	 * Kayttajien vastausten tallennuksen ArrayListiin on kirjoittanut Leevi
+	 * Loput on Juhon
+	 */
+	
+	/**
+	 * Luodaan Integer tyyppinen ArrayList johon tallennetaan kayttajan antamat vastukset
+	 */
+	
 	ArrayList<Integer> kayttajanVastaukset = new ArrayList<>();
+	
+	/**
+	 * Vastaanotetaan sessioon tallennettu listan koko
+	 */
 	
 	HttpSession session=request.getSession(false);
 	int size = (int) session.getAttribute("pituus");
 	int vastaus = 0;
 	
+	/**
+	 * Luodaan for loop jolla saadaan kayttajan vastaukset tallenettua ArrayListiin
+	 */
+	
 	for (int i=0;i<size;i++) {
+		
+		/**
+		 * Looppi pyorii kysymysten maaran verran ja vastaanottaa GUI.jsp:lta kayttajan vastaukset 
+		 * Sen jalkeen ne lisataan ArrayListiin
+		 */
 		
 		String param = "radios" + i;
 		String vastausString = request.getParameter(param);
@@ -57,19 +90,34 @@ public class VastaustenVertailu extends HttpServlet {
 
 	}
 	
-
-	// Then we compare user answers with the candidates answers
+	/**
+	 * Tasta alkaa Juhon koodi
+	 */
 	
-	// First we connect to database via daoAnswers.java and execute method SelectEhdokkaat from daoAnswers.java
-    // The ArrayList which is returned from method is inserted into list ArrayList
+	/**
+	 *  Verrataan k‰ytt‰j‰n vastauksia ehdokkaan vastauksiin
+	 */
+	
+	/**
+	 * Luodaan yhteys tietokantaan daoAnswers.java kautta ja toteutetaan metodi SelectEhdokkaat
+	 */
+
+	
+	/**
+	 * ArrayList joka palautuu metodista laittaan ArrayListaan
+	 */
 	dao = new DaoAnswers("jdbc:mysql://localhost:3306/vaalikone", "pena", "kukkuu");
     ArrayList<Vastaukset> list = dao.SelectEhdokkaanVastaukset();
     
-    // For comparison two new ArrayLists are created
+    /**
+     * Vertailua varten luodaan kaksi uutta listaa
+     */
     ArrayList<ArrayList<Integer> > Ehdokkaat = new ArrayList<ArrayList<Integer> >();
     ArrayList<Integer> list2 = new ArrayList<>();
     
-    // Then we use for loop to get the candidates answers from the list
+    /** 
+     * K‰ytet‰‰n for-looppia ehdokkaiden vastausten hakemiseen
+     */
     int ehdokasVastaus=0;
     
 
@@ -93,11 +141,9 @@ public class VastaustenVertailu extends HttpServlet {
 			}
 			
 
-  
-    
-
-    
-    	
+    /**
+     * Luodaan lista tuloksia varten
+     */
 	ArrayList<List> tulokset = new ArrayList<List>();
 	   
     
@@ -114,8 +160,12 @@ public class VastaustenVertailu extends HttpServlet {
     	tulokset.add(tulos);
     }
     
-
+    /**
+     * Luodaan lista siit‰ kuinka sopiva ehdokas on.
+     * Ja toinen samanlainen jossa ne asetetaan j‰rjestykseen sopivin ehdokas ensin
+     */
     ArrayList<Integer> sopivuus = new ArrayList<Integer>();
+    
     ArrayList<Integer> sopivuus2 = new ArrayList<Integer>();
     
     int sum=0;
@@ -132,28 +182,39 @@ public class VastaustenVertailu extends HttpServlet {
     	
     }
     
+    /**
+     * Listan j‰rjest‰minen
+     */
+    
     //response.getWriter().println(sopivuus);
     Collections.sort(sopivuus);
     //response.getWriter().println(sopivuus);
     //response.getWriter().println(sopivuus2);
+    
     int eka = sopivuus.get(0);
     int toka = sopivuus.get(1);
     int kolmas = sopivuus.get(2);
     
-    //response.getWriter().println(eka + " " + toka + " " + kolmas);
     
-//    response.getWriter().println(sopivuus);
+    
+
     int ekaIndex =sopivuus2.indexOf(eka);
     int tokaIndex =sopivuus2.indexOf(toka);
     int kolmasIndex =sopivuus2.indexOf(kolmas);
-//    response.getWriter().println("Pienimm‰n luvun indeksi: "+ minIndex);
+
     
+    /**
+     * Lista kolmen parhaan ehdokkaan ID:st‰
+     */
     ArrayList<Integer> paras_id = new ArrayList<Integer>();
     paras_id.add(ekaIndex);
     paras_id.add(tokaIndex);
     paras_id.add(kolmasIndex);
-    //response.getWriter().println(paras_id);
     
+    
+    /**
+     * Haetaan vastaajan ID for-loopilla
+     */
     int count = 0;
     ArrayList<Integer> ehdokas_id = new ArrayList<Integer>();
     
@@ -162,15 +223,19 @@ public class VastaustenVertailu extends HttpServlet {
     ehdokas_id.add(g.getVastaaja_id());
     count = count + size;
     }
-    //response.getWriter().println(ehdokas_id);
-    
+   
+    /**
+     * Top-3 ehdokkaat j‰rjestyksess‰ alkaien sopivimmasta
+     */
     ArrayList<Integer> top3_id = new ArrayList<Integer>();
     top3_id.add(ehdokas_id.get(paras_id.get(0)));
     top3_id.add(ehdokas_id.get(paras_id.get(1)));
     top3_id.add(ehdokas_id.get(paras_id.get(2)));
     
-    //response.getWriter().println(top3_id);
-    
+  
+    /**
+     * L‰hetet‰‰n servletille sopivimmat ehdokkaat
+     */
 
 	session.setAttribute("Ehdokas_id", top3_id);
 	response.sendRedirect("/naytasopivatehdokkaat");

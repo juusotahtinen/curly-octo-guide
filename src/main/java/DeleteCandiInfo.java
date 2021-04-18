@@ -1,7 +1,6 @@
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,12 +15,18 @@ import data.Candidates;
 
 
 
-
+/**
+ * @author juuso
+ * Servlet implementation class DeleteCandiInfo
+ */
 @WebServlet("/deletecandiinfo1")
 public class DeleteCandiInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Dao dao=null;
 	
+	/**
+	 * Otetaan yhteys tietokantaan
+	 */
 	@Override
 	public void init() {
 		dao=new Dao("jdbc:mysql://localhost:3306/vaalikone", "pena", "kukkuu");
@@ -32,6 +37,9 @@ public class DeleteCandiInfo extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
  
+	/**
+	 * Otetaan candidateInfo vastaan Dao.javasta ja poistetaan ehdokas_id:n mukaisen ehdokkaan tiedot tietokannasta.
+	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         

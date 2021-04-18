@@ -2,17 +2,54 @@ package data;
 
 public class Candidates {
 
+	/**
+	 * Ehdokkaan id
+	 */
 	private int ehdokas_id;
+	/**
+	 * Ehdokkaan sukunimi
+	 */
 	private String sukunimi;
+	/**
+	 * Ehdokkaan etunimi
+	 */
 	private String etunimi;
+	/**
+	 * Ehdokkaan edustama puolue
+	 */
 	private String puolue;
+	/**
+	 * Ehdokkaan kotipaikkakunta
+	 */
 	private String kotipaikkakunta;
+	/**
+	 * Ehdokkaan ikä
+	 */
 	private int ika;
+	/**
+	 * Miksi ehdokas pyrkii eduskuntaan
+	 */
 	private String miksi_eduskuntaan;
+	/**
+	 * Mitä asioita ehdokas haluaa edistää
+	 */
 	private String mita_asioita_haluat_edistaa;
+	/**
+	 * Ehdokkaan ammatti
+	 */
 	private String ammatti;
 	
 	
+	/**
+	 * @param sukunimi Ehdokkaan sukunimi
+	 * @param etunimi Ehdokkaan etunimi
+	 * @param puolue Ehdokkaan edustama puolue
+	 * @param kotipaikkakunta Ehdokkaan kotipaikkakunta
+	 * @param ika Ehdokkaan ikä
+	 * @param miksi_eduskuntaan Miksi ehdokas pyrkii eduskuntaan
+	 * @param mita_asioita_haluat_edistaa Mitä asioita ehdokas haluaa edistää
+	 * @param ammatti Ehdokkaan ammatti
+	 */
 	public Candidates(String sukunimi, String etunimi, String puolue, String kotipaikkakunta, int ika, String miksi_eduskuntaan, String mita_asioita_haluat_edistaa, String ammatti) {
 
 		this.sukunimi=sukunimi;

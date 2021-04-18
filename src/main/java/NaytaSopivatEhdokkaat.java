@@ -17,6 +17,9 @@ import data.Candidates;
 import data.Kysymykset;
 import data.Vastaukset;
 
+/**
+ * Luodaan servlet NaytaSopivatEhdokkaat joka nayttaa kayttajalle kolme sopivinta ehdokasta
+ */
 
 @WebServlet(
     name = "NaytaSopivatEhdokkaat",
@@ -34,15 +37,26 @@ public class NaytaSopivatEhdokkaat extends HttpServlet {
     response.setContentType("text/plain");
     response.setCharacterEncoding("UTF-8");
 
+    /**
+     * Luodaan yhteys tietokantaan
+     */
     dao = new DaoAnswers("jdbc:mysql://localhost:3306/vaalikone", "pena", "kukkuu");
-	
+    
+	/**
+	 * Kaytetaan sessioon tallennettua atribuuttia nimeltaan ehdokas_id
+	 */
     HttpSession session=request.getSession(false);
     ArrayList<Integer> top3_id = (ArrayList<Integer>) session.getAttribute("Ehdokas_id");
     
-    
+    /**
+     * Laitetaan parhaatEhdokkaat listaan
+     */
     Candidates sopivaEhdokas = null;
-    ArrayList<Candidates> ehdokasOliot = new ArrayList<>();
+    ArrayList<Candidates> parhaatEhdokkaat = new ArrayList<>();
     
+    /**
+     * Haetaan ID:llä top-3 ehdokkaat listaan
+     */
     for(int i=0; i< top3_id.size(); i++) {
     	int id = top3_id.get(i);
     	
@@ -52,21 +66,17 @@ public class NaytaSopivatEhdokkaat extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	ehdokasOliot.add(sopivaEhdokas);
+    	parhaatEhdokkaat.add(sopivaEhdokas);
     }
     
-		
-
+    /**
+     * Lähetetään lista jsp:lle
+     */
     
-    request.setAttribute("ehdokasOliot", ehdokasOliot);
+    request.setAttribute("parhaatEhdokkaat", parhaatEhdokkaat);
     
     RequestDispatcher rd = request.getRequestDispatcher("jsp/showbestcandidates.jsp");
     rd.forward(request,  response);
     
-
-    
-        
-
-
   }
 }

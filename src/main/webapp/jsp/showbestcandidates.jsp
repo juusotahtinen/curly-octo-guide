@@ -1,3 +1,13 @@
+<!-- 
+Author Juho Hämäläinen
+
+Tassa JSP ohjelmassa luodaan graafinen nakyma sopivimmista ehdokkaista käyttäjälle hänen vastattuaan vaalikoneen kysymyksiin.
+
+ -->
+
+<!-- Alussa tarpeelliset asiat sivun muotoa varten -->
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  
@@ -22,14 +32,18 @@
   	<div class="container">
   	<div class="row">
   	<div class="col-sm-12">
+  	
+  	<!-- Haetaan sopivaEhdokas listaan ehdokkaat  -->
   	<%
-  	ArrayList<Candidates> sopivaEhdokas = (ArrayList<Candidates>)request.getAttribute("ehdokasOliot");
+  	ArrayList<Candidates> sopivaEhdokas = (ArrayList<Candidates>)request.getAttribute("parhaatEhdokkaat");
   	
   	
   	for ( int i=0;i <sopivaEhdokas.size();i++){
 		
 		Candidates k=sopivaEhdokas.get(i);
 	%>
+	
+	<!--  Muotoillaan sivulle näkyviin kolmen parhaan ehdokkaan äänestysnumero, ehdokkaan nimi ja puolue -->
 		<div class="row justify-content-md-center">
 		<div class="col">
 		<br>

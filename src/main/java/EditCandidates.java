@@ -50,7 +50,8 @@ public class EditCandidates extends HttpServlet {
 		if (dao.getConnection()) {
 			listCandidates=dao.updateCandis(sukunimi, etunimi, puolue, id);
 		}
-
+		
+		
 		response.sendRedirect("/showcandidates");
 		
 	}

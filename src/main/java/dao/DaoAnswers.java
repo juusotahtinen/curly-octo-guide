@@ -1,70 +1,146 @@
 package dao;
 
 import java.sql.*;
+import java.util.ArrayList;
 
+import data.Candidates;
+import data.Kysymykset;
+import data.Vastaukset;
+
+/**
+ * 
+ * @author Leevi Palo
+ * @author Juho Hamalainen
+ *
+ */
 
 public class DaoAnswers {
-	
-	String dbURL = "jdbc:mysql://localhost:3306/vaalikone";
-	String username = "pena";
-	String password = "kukkuu";
-	Connection conn = null;
-	
-//	private String dbURL;
-//	private String username;
-//	private String password;
-	
-//	public Dao(String string, String string2, String string3) {
-//		this.dbURL = string;
-//		this.username = string2;
-//		this.password = string3;
-//		
-//	}
-	
-	
-	
-	public void Insert() {
-		 
-		try {
-			
-			try {
-				Class.forName("com.mysql.jdbc.Driver");
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		    Connection conn = DriverManager.getConnection(dbURL, username, password);
-		    
-		 
-		    if (conn != null) {
-		        System.out.println("Connected");
-		    }
-		    
-		    String sql = "INSERT INTO ehdokkaat (EHDOKAS_ID, SUKUNIMI, ETUNIMI, PUOLUE) VALUES (?, ?, ?, ?)";
-			
-			PreparedStatement statement = conn.prepareStatement(sql);
-			statement.setString(1, "327");
-			statement.setString(2, "Palo");
-			statement.setString(3, "Leevi");
-			statement.setString(4, "Kokoomus");
-			 
-			int rowsInserted = statement.executeUpdate();
-			
-			if (rowsInserted > 0) {
-			    System.out.println("A new user was inserted successfully!");
-			}
-			
-			
 
-			
-		} catch (SQLException ex) {
-		    ex.printStackTrace();
-		}
+	/**
+	 * Alustetaan tarvittavat muuttujat: tietokannan osoite, kayttajatunnus ja salasana
+	 */
+	
+	private String dbURL;
+	private String username;
+	private String password;
+	
+	/**
+	 * Muodostin oliolle
+	 * @param dbURL tietokannan osoite
+	 * @param username tietokannan kayttajatunnus
+	 * @param password tietokannan salasana
+	 */
+	
+	public DaoAnswers(String dbURL, String username, String password) {
+		this.dbURL = dbURL;
+		this.username = username;
+		this.password = password;
 		
 	}
 	
-	public void Select() {
+
+
+
+	/**
+	 * Juhon koodia
+	 * @return
+	 */
+	
+	public ArrayList<Vastaukset> SelectEhdokkaanVastaukset() {
+
+		ArrayList<Vastaukset> list = new ArrayList<Vastaukset>();
+
+		try {
+
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			Connection conn = DriverManager.getConnection(dbURL, username, password);
+
+			String sql2 = "SELECT * FROM vastaukset";
+
+			Statement statement2 = conn.createStatement();
+			ResultSet result = statement2.executeQuery(sql2);
+
+			while (result.next()) {
+				Vastaukset v = new Vastaukset();
+				v.setKysymys_id(result.getInt("KYSYMYS_ID"));
+				v.setVastaaja_id(result.getInt("EHDOKAS_ID"));
+				v.setVastaus(result.getInt("vastaus"));
+				list.add(v);
+
+			}
+			return list;
+
+		} catch (SQLException ex) {
+			return null;
+		}
+
+	}
+	
+	/**
+	 * Juhon koodia
+	 * @param ehdokas_id
+	 * @return
+	 * @throws SQLException
+	 */
+	
+	public Candidates EhdokkaanTiedot(Integer ehdokas_id) throws SQLException {
+		
+		Candidates f =new Candidates();
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		Connection conn = DriverManager.getConnection(dbURL, username, password);
+
+		try {
+			
+			String sql="select ehdokas_id, etunimi, sukunimi, puolue from ehdokkaat where ehdokas_id=?";
+			PreparedStatement pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, ehdokas_id);
+			ResultSet RS=pstmt.executeQuery();
+			while (RS.next()){
+				
+				f.setEhdokas_id(RS.getInt("ehdokas_id"));
+				f.setSukunimi(RS.getString("sukunimi"));
+				f.setEtunimi(RS.getString("etunimi"));
+				f.setPuolue(RS.getString("puolue"));
+				
+			}
+			return f;
+		}
+		catch(SQLException e) {
+			return null;
+		}
+	}
+	
+	/**
+	 * Leevin koodia
+	 * Haetaan tietokannasta kysymykset ja niiden id ja lisataan ArrayListiin jonka tyyppi on Kysymykset
+	 * @return palautetaan ArrayList joka sisaltaa kysymykset ja niiden id:n
+	 */
+	 
+	
+	public ArrayList<Kysymykset> Select() {
+		
+		/**
+		 * Luodaan ArrayList joka palautetaan
+		 */
+		
+		ArrayList<Kysymykset> list = new ArrayList<Kysymykset>();
+		
+		/**
+		 * Try Catch rakenne tietokannan yhteyden luomiseen ja kayttoon
+		 */
 		 
 		try {
 			
@@ -75,92 +151,57 @@ public class DaoAnswers {
 				e.printStackTrace();
 			}
 		 
-		    Connection conn = DriverManager.getConnection(dbURL, username, password);
-
+			/**
+			 * Yhteyden luonti
+			 */
 			
-			String sql2 = "SELECT * FROM ehdokkaat";
+		    Connection conn = DriverManager.getConnection(dbURL, username, password);
+		    
+		    /**
+		     * SQL lause ja sen suoritus
+		     */
+			
+			String sql2 = "SELECT * FROM kysymykset";
 			 
 			Statement statement2 = conn.createStatement();
 			ResultSet result = statement2.executeQuery(sql2);
 			 
-
+			/**
+			 * While loop jossa tallennetaan ArrayListiin halutut tiedot
+			 */
 			 
 			while (result.next()){
-			    String id = result.getString(1);
-			    String sukunimi = result.getString(2);
-			    String etunimi = result.getString("ETUNIMI");
-			    String puolue = result.getString("PUOLUE");
-			 
-			    String output = "%s - %s - %s - %s";
+				
+				/**
+				 * Luodaan Kysymykset tyyppinen olio johon tallennetaan ylla mainitut arvot
+				 */
+				
+				Kysymykset k = new Kysymykset();
+				k.setId(result.getInt("KYSYMYS_ID"));
+				k.setKysymys(result.getString("KYSYMYS"));
+				
+				/**
+				 * Lisataan olio listaan
+				 */
+				
+				list.add(k);
+
 			    
-			    System.out.println(String.format(output, id, sukunimi, etunimi, puolue));
 			}
+			return list;
 			
 			
 			
 		} catch (SQLException ex) {
-		    ex.printStackTrace();
+		    return null;
 		}
+
+
 	}
 	
-	public void Update() {
-		 
-		try {
-		 
-		    Connection conn = DriverManager.getConnection(dbURL, username, password);
-		    
-
-			
-			String sql3 = "UPDATE Users SET password=?, fullname=?, email=? WHERE username=?";
-			 
-			PreparedStatement statement3 = conn.prepareStatement(sql3);
-			statement3.setString(1, "123456789");
-			statement3.setString(2, "William Henry Bill Gates");
-			statement3.setString(3, "bill.gates@microsoft.com");
-			statement3.setString(4, "bill");
-			 
-			int rowsUpdated = statement3.executeUpdate();
-			
-			if (rowsUpdated > 0) {
-			    System.out.println("An existing user was updated successfully!");
-			}
-
-
-			
-		} catch (SQLException ex) {
-		    ex.printStackTrace();
-		}
-	}
 	
-	public void Delete() {
-		 
-		try {
-		 
-		    Connection conn = DriverManager.getConnection(dbURL, username, password);
-		    
-		 
-		    if (conn != null) {
-		        System.out.println("Connected");
-		    }
-
-			
-			String sql4 = "DELETE FROM Users WHERE username=?";
-			 
-			PreparedStatement statement4 = conn.prepareStatement(sql4);
-			statement4.setString(1, "bill");
-			 
-			int rowsDeleted = statement4.executeUpdate();
-			
-			if (rowsDeleted > 0) {
-			    System.out.println("A user was deleted successfully!");
-			}
-
-			
-		} catch (SQLException ex) {
-		    ex.printStackTrace();
-		}
-	}
-
-
-
 }
+
+
+
+
