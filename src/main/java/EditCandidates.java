@@ -14,11 +14,17 @@ import data.Candidates;
 
 
 
-
+/**
+ * @author riku
+ * Servlet implementation class EditCandidates1
+ */
 @WebServlet("/editcandidates1")
 public class EditCandidates extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Dao dao=null;
+	/**
+	 * Otetaan yhteys tietokantaan
+	 */
 	@Override
 	public void init() {
 		dao=new Dao("jdbc:mysql://localhost:3306/vaalikone", "pena", "kukkuu");
@@ -28,6 +34,10 @@ public class EditCandidates extends HttpServlet {
 	     throws IOException {
 
 	}
+	
+	/**
+	 * Otetaan listCandidates vastaan Dao.javasta ja p‰ivitet‰‰n tiedot "sukunimi", "etunimi" ja "puolue" ehdokas_id:n mukaan.
+	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) 
 		     throws IOException, ServletException {
 			
@@ -37,13 +47,7 @@ public class EditCandidates extends HttpServlet {
 			String puolue=request.getParameter("puolue");
 			String ehdokas_id=request.getParameter("ehdokas_id");
 			int id = Integer.parseInt(ehdokas_id);
-//			response.getWriter().println(sukunimi + etunimi + puolue + ehdokas_id);
-//			String kotipaikkakunta=request.getParameter("kotipaikkakunta");
-//			int ika=Integer.parseInt(request.getParameter("ika"));
-//			String miksi_eduskuntaan=request.getParameter("miksi_eduskuntaan");
-//			String mita_asioita_haluat_edistaa=request.getParameter("mita_asioita_haluat_edistaa");
-//			String ammatti=request.getParameter("ammatti");
-			
+	
 			
 		
 		ArrayList<Candidates> listCandidates=null;

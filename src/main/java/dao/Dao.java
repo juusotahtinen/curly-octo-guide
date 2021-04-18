@@ -85,7 +85,12 @@ public class Dao {
         return listCandidates;
 	}
 	
-	
+	/**
+	 * @author riku
+	 * Suoritetaan sql-lause jolla valitaan ehdokkaista yksi ehdokas ehdokas_id:n perusteella
+	 * @param ehdokas_id
+	 * @return candidateInfo
+	 */
 	public ArrayList<Candidates> getEhdokasInfo(String ehdokas_id) {
 		ArrayList<Candidates> candidateInfo = new ArrayList<Candidates>();
 		try {
@@ -118,6 +123,12 @@ public class Dao {
 		}
 
 	}	
+	/**
+	 * @author riku
+	 * Suoritetaan sql-lause jolla muokataan ehdokas_id:n mukaan sukunimi, etunimi ja puolue
+	 * @param ehdokas_id, sukunimi, etunimi, puolue
+	 * @return listAllCandidates
+	 */
 	public ArrayList<Candidates> updateCandis(String sukunimi, String etunimi, String puolue, int ehdokas_id) {
 	try {
 		String sql="update ehdokkaat set sukunimi=?, etunimi=?, puolue=? where ehdokas_id=?";
