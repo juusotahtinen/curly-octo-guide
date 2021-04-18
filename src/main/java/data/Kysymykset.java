@@ -1,8 +1,23 @@
 package data;
 
+/**
+ * 
+ * @author Leevi Palo
+ * Data luokka kysymysten lukua tietokannasta varten
+ *
+ */
+
 public class Kysymykset {
+	
+	/**
+	 * Alustetaan id ja kysymys, jotka tarkoittavat tietokannasta saatuja kysymyksia ja niiden id:ta
+	 */
 	private int id;
 	private String kysymys;
+	
+	/**
+	 * Setter ja Getter rakenne ylla alustetuille muuttujille
+	 */
 	
 	public int getId() {
 		return id;
