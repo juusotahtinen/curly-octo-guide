@@ -1,2 +1,2 @@
-# Vaalikone osa 1
-Tässä projektissa ohjelmoidaan vaalikone hyödyntäen Java Servlettejä.
+# Election machine part 1
+Programming of a election machine using Java servlets. School project.
